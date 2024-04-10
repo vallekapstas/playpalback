@@ -1,5 +1,6 @@
 package ee.valiit.playpalback.business.login;
 
+import ee.valiit.playpalback.business.login.dto.LoginResponse;
 import ee.valiit.playpalback.infrastructure.error.ApiError;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -26,8 +27,8 @@ public class LoginController {
             @ApiResponse(responseCode = "403", description = "Wrong username or password",
                     content = @Content(schema = @Schema(implementation = ApiError.class)))
     })
-    public void login(@RequestParam String username, @RequestParam String password) {
-        loginService.login(username, password);
+    public LoginResponse login(@RequestParam String username, @RequestParam String password) {
+        return loginService.login(username, password);
     }
 
 }

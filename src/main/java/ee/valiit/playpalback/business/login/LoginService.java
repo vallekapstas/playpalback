@@ -1,7 +1,9 @@
 package ee.valiit.playpalback.business.login;
 
 import ee.valiit.playpalback.business.Status;
+import ee.valiit.playpalback.business.login.dto.LoginResponse;
 import ee.valiit.playpalback.domain.user.user.User;
+import ee.valiit.playpalback.domain.user.user.UserMapper;
 import ee.valiit.playpalback.domain.user.user.UserRepository;
 import ee.valiit.playpalback.infrastructure.validation.ValidationService;
 import lombok.AllArgsConstructor;
@@ -14,9 +16,11 @@ import java.util.Optional;
 public class LoginService {
 
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
-    public void login(String username, String password) {
+    public LoginResponse login(String username, String password) {
         Optional<User> optionalUser = userRepository.findUserBy(username, password, Status.ACTIVE);
-        ValidationService.getValidExistingUser(optionalUser);
+        User user = ValidationService.getValidExistingUser(optionalUser);
+        return userMapper.toLoginResponse(user);
     }
 }
