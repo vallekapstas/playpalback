@@ -3,5 +3,7 @@
   <component name="JpaBuddyIdeaProjectConfig">
     <option name="defaultUnitInitialized" value="true" />
     <option name="renamerInitialized" value="true" />
+    <option name="reverseEngineeringLastDbConnectionId" value="01e737ce-dab7-495d-8589-1629c79b9e05__postgres_playpal" />
+    <option name="reLastEntityCreationPackage" value="src/main/java/ee/valiit/playpalback/domain" />
   </component>
 </project>
