@@ -1,5 +1,6 @@
-package ee.valiit.playpalback.domain;
+package ee.valiit.playpalback.domain.location.city;
 
+import ee.valiit.playpalback.domain.location.county.County;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -9,12 +10,17 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "county", schema = "playpal")
-public class County {
+@Table(name = "city", schema = "playpal")
+public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "county_id", nullable = false)
+    private County county;
 
     @Size(max = 255)
     @NotNull
@@ -24,10 +30,5 @@ public class County {
     @NotNull
     @Column(name = "status", nullable = false, length = Integer.MAX_VALUE)
     private String status;
-
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "country_id", nullable = false)
-    private Country country;
 
 }

@@ -1,9 +1,6 @@
-package ee.valiit.playpalback.domain;
+package ee.valiit.playpalback.domain.location.country;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -12,9 +9,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "tag", schema = "playpal")
-public class Tag {
+@Table(name = "country", schema = "playpal")
+public class Country {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 

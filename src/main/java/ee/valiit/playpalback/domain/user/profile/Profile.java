@@ -1,6 +1,8 @@
-package ee.valiit.playpalback.domain;
+package ee.valiit.playpalback.domain.user.profile;
 
-import ee.valiit.playpalback.domain.city.City;
+import ee.valiit.playpalback.domain.user.user.User;
+import ee.valiit.playpalback.domain.location.city.City;
+import ee.valiit.playpalback.domain.user.gender.Gender;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

@@ -1,4 +1,4 @@
-package ee.valiit.playpalback.domain;
+package ee.valiit.playpalback.domain.game.game;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -9,8 +9,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "gender", schema = "playpal")
-public class Gender {
+@Table(name = "game", schema = "playpal")
+public class Game {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)

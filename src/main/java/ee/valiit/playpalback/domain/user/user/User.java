@@ -1,5 +1,6 @@
-package ee.valiit.playpalback.domain;
+package ee.valiit.playpalback.domain.user.user;
 
+import ee.valiit.playpalback.domain.participant.role.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

@@ -1,31 +1,31 @@
-package ee.valiit.playpalback.domain.city;
+package ee.valiit.playpalback.domain.backlog.notification;
 
-import ee.valiit.playpalback.domain.County;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.Instant;
+
 @Getter
 @Setter
 @Entity
-@Table(name = "city", schema = "playpal")
-public class City {
+@Table(name = "notification", schema = "playpal")
+public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "county_id", nullable = false)
-    private County county;
-
     @Size(max = 255)
     @NotNull
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "message", nullable = false)
+    private String message;
+
+    @NotNull
+    @Column(name = "time_created", nullable = false)
+    private Instant timeCreated;
 
     @NotNull
     @Column(name = "status", nullable = false, length = Integer.MAX_VALUE)

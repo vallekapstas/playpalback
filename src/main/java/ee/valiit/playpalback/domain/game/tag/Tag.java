@@ -1,4 +1,4 @@
-package ee.valiit.playpalback.domain;
+package ee.valiit.playpalback.domain.game.tag;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,8 +12,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "type", schema = "playpal")
-public class Type {
+@Table(name = "tag", schema = "playpal")
+public class Tag {
     @Id
     @Column(name = "id", nullable = false)
     private Integer id;

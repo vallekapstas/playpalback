@@ -1,5 +1,7 @@
-package ee.valiit.playpalback.domain;
+package ee.valiit.playpalback.domain.game.gametag;
 
+import ee.valiit.playpalback.domain.game.tag.Tag;
+import ee.valiit.playpalback.domain.game.game.Game;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -8,8 +10,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "feedback", schema = "playpal")
-public class Feedback {
+@Table(name = "game_tag", schema = "playpal")
+public class GameTag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -17,8 +19,13 @@ public class Feedback {
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "type_id", nullable = false)
-    private Type type;
+    @JoinColumn(name = "game_id", nullable = false)
+    private Game game;
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "tag_id", nullable = false)
+    private Tag tag;
 
     @NotNull
     @Column(name = "status", nullable = false, length = Integer.MAX_VALUE)

@@ -1,4 +1,4 @@
-package ee.valiit.playpalback.domain;
+package ee.valiit.playpalback.domain.user.gender;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -6,13 +6,11 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.Instant;
-
 @Getter
 @Setter
 @Entity
-@Table(name = "notification", schema = "playpal")
-public class Notification {
+@Table(name = "gender", schema = "playpal")
+public class Gender {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -20,12 +18,8 @@ public class Notification {
 
     @Size(max = 255)
     @NotNull
-    @Column(name = "message", nullable = false)
-    private String message;
-
-    @NotNull
-    @Column(name = "time_created", nullable = false)
-    private Instant timeCreated;
+    @Column(name = "name", nullable = false)
+    private String name;
 
     @NotNull
     @Column(name = "status", nullable = false, length = Integer.MAX_VALUE)
