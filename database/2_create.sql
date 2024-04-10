@@ -33,9 +33,10 @@ CREATE TABLE country
 -- Table: city
 CREATE TABLE city
 (
-    id        serial  NOT NULL,
-    county_id int     NOT NULL,
-    status    char(1) NOT NULL DEFAULT 'A',
+    id        serial       NOT NULL,
+    county_id int          NOT NULL,
+    name      varchar(255) NOT NULL,
+    status    char(1)      NOT NULL DEFAULT 'A',
     CONSTRAINT city_pk PRIMARY KEY (id)
 );
 
@@ -55,8 +56,8 @@ CREATE TABLE location
 (
     id         serial        NOT NULL,
     city_id    int           NOT NULL,
-    post_code  int           NOT NULL,
-    street     int           NOT NULL,
+    post_code  char(10)      NOT NULL,
+    street     text          NOT NULL,
     longtitude decimal(8, 6) NULL,
     latitude   decimal(8, 6) NULL,
     status     char(1)       NOT NULL DEFAULT 'A',
@@ -179,7 +180,7 @@ CREATE TABLE game_tag
 CREATE TABLE event_image
 (
     id         serial NOT NULL,
-    image_data int    NULL,
+    image_data bytea  NULL,
     event_id   int    NOT NULL,
     CONSTRAINT event_image_pk PRIMARY KEY (id)
 );
@@ -198,7 +199,7 @@ CREATE TABLE participant
 CREATE TABLE user_image
 (
     id         serial NOT NULL,
-    image_data int    NULL,
+    image_data bytea  NULL,
     profile_id int    NOT NULL,
     CONSTRAINT user_image_pk PRIMARY KEY (id)
 );
