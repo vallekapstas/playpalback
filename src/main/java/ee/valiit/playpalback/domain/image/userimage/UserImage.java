@@ -12,6 +12,7 @@ import lombok.Setter;
 @Table(name = "user_image", schema = "playpal")
 public class UserImage {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
