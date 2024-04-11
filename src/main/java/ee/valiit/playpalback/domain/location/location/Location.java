@@ -33,8 +33,8 @@ public class Location {
     @Column(name = "street", nullable = false, length = Integer.MAX_VALUE)
     private String street;
 
-    @Column(name = "longtitude", precision = 8, scale = 6)
-    private BigDecimal longtitude;
+    @Column(name = "longitude", precision = 8, scale = 6)
+    private BigDecimal longitude;
 
     @Column(name = "latitude", precision = 8, scale = 6)
     private BigDecimal latitude;

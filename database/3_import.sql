@@ -49,7 +49,7 @@ INSERT INTO playpal.skill (name) VALUES ('Algaja');
 INSERT INTO playpal.skill (name) VALUES ('Edasijõudnu');
 INSERT INTO playpal.skill (name) VALUES ('Ekspert');
 
-INSERT INTO playpal.location (city_id, post_code, street, longtitude, latitude) VALUES (1, '10000     ', 'Vinge tee 3', 59.385130, 25.302980);
+INSERT INTO playpal.location (city_id, post_code, street, longitude, latitude) VALUES (1, '10000     ', 'Vinge tee 3', 59.385130, 25.302980);
 
 INSERT INTO playpal.event (user_id, name, venue, start_date, end_date, start_time, end_time, min_players, max_players, min_age, max_age, fee, skill_id, location_id) VALUES (1, 'Monopolyõhtu Raini juures', 'Raini pleiss', '2024-05-04', '2024-05-04', '16:00:00', '22:00:00', 2, 22, 18, 125, null, 1, 1);
 
