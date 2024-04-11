@@ -58,7 +58,7 @@ CREATE TABLE location
     city_id    int           NOT NULL,
     post_code  char(10)      NOT NULL,
     street     text          NOT NULL,
-    longtitude decimal(8, 6) NULL,
+    longitude decimal(8, 6) NULL,
     latitude   decimal(8, 6) NULL,
     status     char(1)       NOT NULL DEFAULT 'A',
     CONSTRAINT location_pk PRIMARY KEY (id)
@@ -95,7 +95,7 @@ CREATE TABLE skill
 CREATE TABLE "user"
 (
     id       serial       NOT NULL,
-    username varchar(30)  NOT NULL,
+    username varchar(30)  NOT NULL UNIQUE,
     password varchar(255) NOT NULL,
     role_id  int          NOT NULL,
     status   char(1)      NOT NULL DEFAULT 'A',
