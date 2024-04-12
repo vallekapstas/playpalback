@@ -17,7 +17,7 @@ public class CityController {
 
     @GetMapping("/cities/county/{countyId}")
     @Operation(summary = "Returns cityId and cityName using countyId",
-            description = "return a list of all the cities that belong under the provided countyId.")
+            description = "Returns a list of all the cities that belong under the provided countyId.")
     public List<CityInfo> getCitiesByCountyId(@PathVariable Integer countyId) {
         return cityService.getCitiesByCountyId(countyId);
 
