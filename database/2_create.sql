@@ -97,7 +97,7 @@ CREATE TABLE "user"
     id       serial       NOT NULL,
     username varchar(30)  NOT NULL UNIQUE,
     password varchar(255) NOT NULL,
-    role_id  int          NOT NULL,
+    role_id  int          NOT NULL DEFAULT 2,
     status   char(1)      NOT NULL DEFAULT 'A',
     CONSTRAINT user_pk PRIMARY KEY (id)
 );
