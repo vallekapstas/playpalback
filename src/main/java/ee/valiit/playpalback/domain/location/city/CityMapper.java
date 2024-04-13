@@ -1,7 +1,10 @@
 package ee.valiit.playpalback.domain.location.city;
 
 import ee.valiit.playpalback.business.city.dto.CityInfo;
-import org.mapstruct.*;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingConstants;
+import org.mapstruct.ReportingPolicy;
 
 import java.util.List;
 
