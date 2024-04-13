@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface CityRepository extends JpaRepository<City, Integer> {
 
-    @Query("select c from City c where c.county.id = :countyId and c.status='A'")
+    @Query("select c from City c where c.county.id = :countyId and c.status='A' order by c.name")
     List<City> findCitiesByCountyId(Integer countyId);
 
 }
