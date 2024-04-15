@@ -9,8 +9,8 @@ import java.util.List;
 public interface CountyMapper {
 
 
-    @Mapping(source = "name", target = "name")
-    @Mapping(source = "id", target = "id")
+    @Mapping(source = "name", target = "countyName")
+    @Mapping(source = "id", target = "countyId")
     CountyInfo toCountyInfo(County county);
 
     List<CountyInfo> toCountyInfos(List<County> counties);
