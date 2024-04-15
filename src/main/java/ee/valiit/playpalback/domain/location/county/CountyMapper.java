@@ -1,6 +1,6 @@
 package ee.valiit.playpalback.domain.location.county;
 
-import ee.valiit.playpalback.business.county.countyInfo.CountyInfo;
+import ee.valiit.playpalback.business.county.dto.CountyInfo;
 import org.mapstruct.*;
 
 import java.util.List;

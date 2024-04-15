@@ -1,4 +1,4 @@
-package ee.valiit.playpalback.business.county.countyInfo;
+package ee.valiit.playpalback.business.county.dto;
 
 import ee.valiit.playpalback.domain.location.county.County;
 import jakarta.validation.constraints.NotNull;

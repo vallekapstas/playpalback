@@ -1,9 +1,6 @@
 package ee.valiit.playpalback.business.county;
 
-import ee.valiit.playpalback.business.city.dto.CityInfo;
-import ee.valiit.playpalback.business.county.countyInfo.CountyInfo;
-import ee.valiit.playpalback.domain.location.city.CityMapper;
-import ee.valiit.playpalback.domain.location.city.CityRepository;
+import ee.valiit.playpalback.business.county.dto.CountyInfo;
 import ee.valiit.playpalback.domain.location.county.County;
 import ee.valiit.playpalback.domain.location.county.CountyMapper;
 import ee.valiit.playpalback.domain.location.county.CountyRepository;
