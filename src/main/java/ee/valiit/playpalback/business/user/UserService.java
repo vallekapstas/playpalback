@@ -8,8 +8,9 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
-    public boolean getUserExistence(String userName) {
-        return userRepository.existsByUsername(userName);
+
+    public boolean getUserNameExists(String userName) {
+        return userRepository.usernameExists(userName);
     }
 
 
