@@ -16,8 +16,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CountyInfo implements Serializable {
-    private Integer countyId;
+    private Integer id;
     @NotNull
     @Size(max = 255)
-    private String countyName;
+    private String name;
 }
