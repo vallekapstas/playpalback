@@ -2,9 +2,7 @@ package ee.valiit.playpalback.business.user;
 
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
@@ -17,5 +15,9 @@ public class UserController {
     public boolean getUserNameExists(@PathVariable String userName) {
         return userService.getUserNameExists(userName);
     }
+
+    @PostMapping("/user/register")
+
+    public void addUser(@RequestBody )
 
 }
