@@ -15,4 +15,10 @@ public class ValidationService {
         }
         return optionalUser.get();
     }
+    public static void  validateUsernameExists(boolean usernameExists) {
+        if (usernameExists) {
+            throw new ForbiddenException(USER_EXISTS.getMessage(), USER_EXISTS.getErrorCode());
+        }
+
+    }
 }
