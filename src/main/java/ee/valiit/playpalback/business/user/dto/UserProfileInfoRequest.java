@@ -17,7 +17,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserRegisterInfoRequest implements Serializable {
+public class UserProfileInfoRequest implements Serializable {
     private String username;
     @NotNull
     @Size(max = 255)

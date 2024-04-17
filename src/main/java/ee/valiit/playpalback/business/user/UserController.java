@@ -1,15 +1,15 @@
 package ee.valiit.playpalback.business.user;
 
-import ee.valiit.playpalback.business.user.dto.UserRegisterInfoRequest;
-import ee.valiit.playpalback.domain.user.user.User;
+import ee.valiit.playpalback.business.user.dto.UserProfileInfoRequest;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
 public class UserController {
-    private final UserService userService;
+    private UserService userService;
 
     @GetMapping("/user/{userName}")
     @Operation(summary = "Returns true or false, returns true if username exists.",
@@ -20,9 +20,8 @@ public class UserController {
 
     @PostMapping("/user/register")
 
-    public void addUser(@RequestBody UserRegisterInfoRequest userRegisterInfoRequest) {
-        userService.addUser(userRegisterInfoRequest);
-
+    public void addUser(@RequestBody @Valid UserProfileInfoRequest userProfileInfoRequest) {
+        userService.addUser(userProfileInfoRequest);
     }
 
 }
