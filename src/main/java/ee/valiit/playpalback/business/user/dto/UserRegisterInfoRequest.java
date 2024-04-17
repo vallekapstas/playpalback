@@ -2,6 +2,7 @@ package ee.valiit.playpalback.business.user.dto;
 
 import ee.valiit.playpalback.domain.user.profile.Profile;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,20 +17,21 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserRegisterInfo implements Serializable {
-    private String userUsername;
-    private String userPassword;
-    private String userStatus;
-    private Integer genderId;
-    private Integer cityId;
+public class UserRegisterInfoRequest implements Serializable {
+    private String username;
     @NotNull
     @Size(max = 255)
     private String firstName;
     @NotNull
     @Size(max = 255)
     private String lastName;
+    private String password;
+    private Integer cityId;
+    private Integer genderId;
     @NotNull
+    @Past
     private LocalDate birthDate;
     private String interestedIn;
     private String introduction;
+    private String userImage;
 }

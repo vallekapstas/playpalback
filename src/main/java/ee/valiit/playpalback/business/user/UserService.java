@@ -1,5 +1,6 @@
 package ee.valiit.playpalback.business.user;
 
+import ee.valiit.playpalback.business.user.dto.UserRegisterInfoRequest;
 import ee.valiit.playpalback.domain.user.user.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,4 +15,8 @@ public class UserService {
     }
 
 
+    public void addUser(UserRegisterInfoRequest userRegisterInfoRequest) {
+
+
+    }
 }

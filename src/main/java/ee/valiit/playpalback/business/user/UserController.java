@@ -1,5 +1,7 @@
 package ee.valiit.playpalback.business.user;
 
+import ee.valiit.playpalback.business.user.dto.UserRegisterInfoRequest;
+import ee.valiit.playpalback.domain.user.user.User;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +20,9 @@ public class UserController {
 
     @PostMapping("/user/register")
 
-    public void addUser(@RequestBody )
+    public void addUser(@RequestBody UserRegisterInfoRequest userRegisterInfoRequest) {
+        userService.addUser(userRegisterInfoRequest);
+
+    }
 
 }
