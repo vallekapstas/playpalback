@@ -33,5 +33,5 @@ public class UserProfileInfoRequest implements Serializable {
     private LocalDate birthDate;
     private String interestedIn;
     private String introduction;
-    private String userImage;
+    private String profileImage;
 }

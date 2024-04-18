@@ -1,7 +1,6 @@
 package ee.valiit.playpalback.infrastructure.validation;
 
 import ee.valiit.playpalback.domain.user.user.User;
-import ee.valiit.playpalback.infrastructure.error.Error;
 import ee.valiit.playpalback.infrastructure.exception.ForbiddenException;
 
 import java.util.Optional;
@@ -15,7 +14,7 @@ public class ValidationService {
         }
         return optionalUser.get();
     }
-    public static void  validateUsernameExists(boolean usernameExists) {
+    public static void validateUserNameIsAvailable(boolean usernameExists) {
         if (usernameExists) {
             throw new ForbiddenException(USER_EXISTS.getMessage(), USER_EXISTS.getErrorCode());
         }

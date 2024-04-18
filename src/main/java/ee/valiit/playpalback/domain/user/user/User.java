@@ -17,6 +17,13 @@ public class User {
     @Column(name = "id", nullable = false)
     private Integer id;
 
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "role_id", nullable = false)
+    private Role role;
+
+
     @Size(max = 30)
     @NotNull
     @Column(name = "username", nullable = false, length = 30)
@@ -26,11 +33,6 @@ public class User {
     @NotNull
     @Column(name = "password", nullable = false)
     private String password;
-
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "role_id", nullable = false)
-    private Role role;
 
     @NotNull
     @Column(name = "status", nullable = false, length = Integer.MAX_VALUE)

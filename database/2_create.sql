@@ -95,9 +95,9 @@ CREATE TABLE skill
 CREATE TABLE "user"
 (
     id       serial       NOT NULL,
+    role_id  int          NOT NULL DEFAULT 2,
     username varchar(30)  NOT NULL UNIQUE,
     password varchar(255) NOT NULL,
-    role_id  int          NOT NULL DEFAULT 2,
     status   char(1)      NOT NULL DEFAULT 'A',
     CONSTRAINT user_pk PRIMARY KEY (id)
 );
@@ -195,13 +195,13 @@ CREATE TABLE participant
     CONSTRAINT participant_pk PRIMARY KEY (id)
 );
 
--- Table: user_image
-CREATE TABLE user_image
+-- Table: profile_image
+CREATE TABLE profile_image
 (
     id         serial NOT NULL,
-    image_data bytea  NULL,
     profile_id int    NOT NULL,
-    CONSTRAINT user_image_pk PRIMARY KEY (id)
+    image_data bytea  NULL,
+    CONSTRAINT profile_image_pk PRIMARY KEY (id)
 );
 
 -- Table: notification
@@ -370,9 +370,9 @@ ALTER TABLE profile
                 INITIALLY IMMEDIATE
 ;
 
--- Reference: user_image_profile (table: user_image)
-ALTER TABLE user_image
-    ADD CONSTRAINT user_image_profile
+-- Reference: profile_image_profile (table: profile_image)
+ALTER TABLE profile_image
+    ADD CONSTRAINT profile_image_profile
         FOREIGN KEY (profile_id)
             REFERENCES profile (id)
             NOT DEFERRABLE

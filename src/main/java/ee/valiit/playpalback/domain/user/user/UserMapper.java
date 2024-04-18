@@ -1,5 +1,6 @@
 package ee.valiit.playpalback.domain.user.user;
 
+import ee.valiit.playpalback.business.Status;
 import ee.valiit.playpalback.business.login.dto.LoginResponse;
 import ee.valiit.playpalback.business.user.dto.UserProfileInfoRequest;
 import org.mapstruct.Mapper;
@@ -18,7 +19,8 @@ public interface UserMapper {
 
     @Mapping(source = "username",target = "username")
     @Mapping(source = "password",target = "password")
-    User touser(UserProfileInfoRequest userProfileInfoRequest);
+    @Mapping(constant = Status.ACTIVE,target = "status")
+    User toUser(UserProfileInfoRequest userProfileInfoRequest);
 
 
 }

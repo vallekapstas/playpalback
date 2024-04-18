@@ -1,4 +1,4 @@
-package ee.valiit.playpalback.domain.image.userimage;
+package ee.valiit.playpalback.domain.image.profileimage;
 
 import ee.valiit.playpalback.domain.user.profile.Profile;
 import jakarta.persistence.*;
@@ -9,19 +9,19 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "user_image", schema = "playpal")
-public class UserImage {
+@Table(name = "profile_image", schema = "playpal")
+public class ProfileImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "image_data")
-    private byte[] imageData;
-
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "profile_id", nullable = false)
     private Profile profile;
+
+    @Column(name = "image_data")
+    private byte[] imageData;
 
 }
