@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     private UserService userService;
 
-    @GetMapping("/user/{userName}")
+    @GetMapping("/user/name/{userName}")
     @Operation(summary = "Returns true or false, returns true if username exists.",
             description = "Returns true if username exists, false is returned if username is not found. Request is not case sensitive")
     public boolean getUserNameExists(@PathVariable String userName) {
@@ -28,7 +28,7 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "403", description = "This username is already taken", content = @Content(schema = @Schema(implementation = ApiError.class)))})
-    public void addUser(@RequestBody @Valid UserProfileInfoRequest userProfileInfoRequest) {
+    public void addUser(@RequestBody  UserProfileInfoRequest userProfileInfoRequest) {
         userService.addUser(userProfileInfoRequest);
     }
 
