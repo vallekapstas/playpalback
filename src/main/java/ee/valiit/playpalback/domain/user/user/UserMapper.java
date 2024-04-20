@@ -17,9 +17,9 @@ public interface UserMapper {
     LoginResponse toLoginResponse(User user);
 
 
-    @Mapping(source = "username",target = "username")
-    @Mapping(source = "password",target = "password")
-    @Mapping(constant = Status.ACTIVE,target = "status")
+    @Mapping(source = "username", target = "username")
+    @Mapping(source = "password", target = "password")
+    @Mapping(constant = Status.ACTIVE, target = "status")
     User toUser(UserProfileInfoRequest userProfileInfoRequest);
 
 

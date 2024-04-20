@@ -1,5 +1,7 @@
 package ee.valiit.playpalback.business.user;
 
+import ee.valiit.playpalback.business.Status;
+import ee.valiit.playpalback.business.user.dto.UserProfileInfoExtended;
 import ee.valiit.playpalback.domain.image.profileimage.ProfileImage;
 import ee.valiit.playpalback.domain.image.profileimage.ProfileImageRepository;
 import ee.valiit.playpalback.business.user.dto.UserProfileInfoRequest;
@@ -23,6 +25,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @Data
 @AllArgsConstructor
@@ -38,6 +42,7 @@ public class UserService {
     private final RoleRepository roleRepository;
     private final ProfileImageRepository profileImageRepository;
 
+
     public boolean getUserNameExists(String userName) {
         return userRepository.usernameExists(userName);
     }
@@ -50,6 +55,24 @@ public class UserService {
         User user = createAndSaveUser(request);
         Profile profile = createAndSaveProfile(request, user);
         handleProfileImage(request, profile);
+    }
+
+    public UserProfileInfoExtended getUserData(Integer userId) {
+        Profile profile = profileRepository.findProfileByUserIdAndStatus(userId, "D");
+        String imageData = getImageData(userId);
+        UserProfileInfoExtended userProfileInfoExtended = profileMapper.toUserProfileInfoExtended(profile);
+        userProfileInfoExtended.setImageData(imageData);
+        return userProfileInfoExtended;
+    }
+
+    private String getImageData(Integer userId) {
+        Optional<ProfileImage> optionalProfileImage = profileImageRepository.findProfileImageByUserId(userId);
+
+        String imageData = "";
+        if (optionalProfileImage.isPresent()) {
+            imageData = StringConverter.bytesToString(optionalProfileImage.get().getImageData());
+        }
+        return imageData;
     }
 
     private void handleProfileImage(UserProfileInfoRequest request, Profile profile) {
