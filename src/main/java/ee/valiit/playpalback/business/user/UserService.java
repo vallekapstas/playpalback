@@ -1,9 +1,9 @@
 package ee.valiit.playpalback.business.user;
 
 import ee.valiit.playpalback.business.user.dto.UserProfileInfoExtended;
+import ee.valiit.playpalback.business.user.dto.UserProfileInfoRequest;
 import ee.valiit.playpalback.domain.image.profileimage.ProfileImage;
 import ee.valiit.playpalback.domain.image.profileimage.ProfileImageRepository;
-import ee.valiit.playpalback.business.user.dto.UserProfileInfoRequest;
 import ee.valiit.playpalback.domain.location.city.City;
 import ee.valiit.playpalback.domain.location.city.CityMapper;
 import ee.valiit.playpalback.domain.location.city.CityRepository;
@@ -17,7 +17,6 @@ import ee.valiit.playpalback.domain.user.profile.ProfileRepository;
 import ee.valiit.playpalback.domain.user.user.User;
 import ee.valiit.playpalback.domain.user.user.UserMapper;
 import ee.valiit.playpalback.domain.user.user.UserRepository;
-import ee.valiit.playpalback.infrastructure.exception.ForbiddenException;
 import ee.valiit.playpalback.infrastructure.validation.ValidationService;
 import ee.valiit.playpalback.util.StringConverter;
 import jakarta.transaction.Transactional;
@@ -26,8 +25,6 @@ import lombok.Data;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-
-import static ee.valiit.playpalback.infrastructure.error.Error.USER_EXISTS;
 
 @Service
 @Data
@@ -96,7 +93,7 @@ public class UserService {
             } else {
                 // Create a new profile image for the user
                 ProfileImage newProfileImage = new ProfileImage();
-                newProfileImage.setProfile(profile); // Assuming profile is already associated with the user
+                newProfileImage.setProfile(profile);
                 newProfileImage.setImageData(StringConverter.stringToBytes(profileImageData));
                 profileImageRepository.save(newProfileImage);
             }
