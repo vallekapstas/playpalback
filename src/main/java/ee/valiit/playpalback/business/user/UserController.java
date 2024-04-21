@@ -39,4 +39,10 @@ public class UserController {
         return userService.getUserData(userId);
     }
 
+    @PutMapping("/user/{userId}")
+    public void editUserProfile(@PathVariable Integer userId, @RequestBody UserProfileInfoRequest userProfileInfoRequest) {
+        userService.editUserProfile(userId, userProfileInfoRequest);
+
+    }
+
 }

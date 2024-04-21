@@ -1,6 +1,5 @@
 package ee.valiit.playpalback.business.user;
 
-import ee.valiit.playpalback.business.Status;
 import ee.valiit.playpalback.business.user.dto.UserProfileInfoExtended;
 import ee.valiit.playpalback.domain.image.profileimage.ProfileImage;
 import ee.valiit.playpalback.domain.image.profileimage.ProfileImageRepository;
@@ -18,6 +17,7 @@ import ee.valiit.playpalback.domain.user.profile.ProfileRepository;
 import ee.valiit.playpalback.domain.user.user.User;
 import ee.valiit.playpalback.domain.user.user.UserMapper;
 import ee.valiit.playpalback.domain.user.user.UserRepository;
+import ee.valiit.playpalback.infrastructure.exception.ForbiddenException;
 import ee.valiit.playpalback.infrastructure.validation.ValidationService;
 import ee.valiit.playpalback.util.StringConverter;
 import jakarta.transaction.Transactional;
@@ -26,6 +26,8 @@ import lombok.Data;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+
+import static ee.valiit.playpalback.infrastructure.error.Error.USER_EXISTS;
 
 @Service
 @Data
@@ -65,6 +67,49 @@ public class UserService {
         return userProfileInfoExtended;
     }
 
+
+    public void editUserProfile(Integer userId, UserProfileInfoRequest userProfileInfoRequest) {
+        Profile profile = profileRepository.getReferenceById(userId);
+        profileMapper.editProfile(userProfileInfoRequest, profile);
+        boolean usernameExists = userRepository.usernameExists(userProfileInfoRequest.getUsername());
+        ValidationService.validateUserNameIsAvailable(usernameExists);
+
+        if (!haveSameCityId(userProfileInfoRequest, profile)) {
+            City city = cityRepository.getReferenceById(userProfileInfoRequest.getCityId());
+            profile.setCity(city);
+        }
+        if (!haveSameGenderId(userProfileInfoRequest, profile)) {
+            Gender gender = genderRepository.getReferenceById(userProfileInfoRequest.getGenderId());
+            profile.setGender(gender);
+        }
+        String profileImageData = userProfileInfoRequest.getProfileImage();
+        if (profileImageData != null && !profileImageData.isEmpty()) {
+            // Retrieve the user's profile image from the database
+            Optional<ProfileImage> profileImageByUserId = profileImageRepository.findProfileImageByUserId(userId);
+
+            // Check if the user already has a profile image
+            if (profileImageByUserId.isPresent()) {
+                // Update the existing profile image with the new image data
+                ProfileImage profileImage = profileImageByUserId.get();
+                profileImage.setImageData(StringConverter.stringToBytes(profileImageData));
+                profileImageRepository.save(profileImage);
+            } else {
+                // Create a new profile image for the user
+                ProfileImage newProfileImage = new ProfileImage();
+                newProfileImage.setProfile(profile); // Assuming profile is already associated with the user
+                newProfileImage.setImageData(StringConverter.stringToBytes(profileImageData));
+                profileImageRepository.save(newProfileImage);
+            }
+        }
+
+
+        profileRepository.save(profile);
+    }
+
+    private static boolean haveSameGenderId(UserProfileInfoRequest userProfileInfoRequest, Profile profile) {
+        return profile.getGender().getId().equals(userProfileInfoRequest.getGenderId());
+    }
+
     private String getImageData(Integer userId) {
         Optional<ProfileImage> optionalProfileImage = profileImageRepository.findProfileImageByUserId(userId);
 
@@ -75,11 +120,20 @@ public class UserService {
         return imageData;
     }
 
+    private static boolean haveSameCityId(UserProfileInfoRequest userProfileInfoRequest, Profile profile) {
+        return profile.getCity().getId().equals(userProfileInfoRequest.getCityId());
+    }
+
+
     private void handleProfileImage(UserProfileInfoRequest request, Profile profile) {
         if (hasProfileImage(request)) {
             createAndSaveProfileImage(request, profile);
 
         }
+    }
+
+    private static boolean hasProfileImage(UserProfileInfoRequest request) {
+        return !request.getProfileImage().isEmpty();
     }
 
     private void createAndSaveProfileImage(UserProfileInfoRequest request, Profile profile) {
@@ -92,10 +146,6 @@ public class UserService {
         profileImage.setProfile(profile);
         profileImage.setImageData(StringConverter.stringToBytes(request.getProfileImage()));
         return profileImage;
-    }
-
-    private static boolean hasProfileImage(UserProfileInfoRequest request) {
-        return !request.getProfileImage().isEmpty();
     }
 
     private Profile createAndSaveProfile(UserProfileInfoRequest request, User user) {

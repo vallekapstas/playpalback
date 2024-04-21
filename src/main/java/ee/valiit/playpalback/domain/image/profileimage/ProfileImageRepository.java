@@ -10,4 +10,8 @@ public interface ProfileImageRepository extends JpaRepository<ProfileImage, Inte
     @Query("select p from ProfileImage p where p.profile.user.id = :userId")
     Optional<ProfileImage> findProfileImageByUserId(Integer userId);
 
+    @Query("select p from ProfileImage p where p.profile.id = :profileId")
+    Optional<ProfileImage> findProfileImageByProfileId(Integer profileId);
+
+
 }
