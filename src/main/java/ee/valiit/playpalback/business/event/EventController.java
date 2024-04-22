@@ -15,7 +15,7 @@ public class EventController {
 
     @GetMapping("/event/{eventId}")
     @Operation(summary = "Returns details for an event by it's ID.",
-            description = "Also returns the eventImage")
+            description = "Also returns the eventImage and Host's firstName and lastName from Profile")
     public EventInfoRequest getEventData(@PathVariable Integer eventId) {
         return eventService.getEventData(eventId);
     }
