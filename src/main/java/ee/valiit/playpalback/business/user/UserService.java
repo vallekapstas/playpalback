@@ -49,8 +49,7 @@ public class UserService {
 
     @Transactional
     public void addUser(UserProfileInfoRequest request) {
-        boolean usernameExists = userRepository.usernameExists(request.getUsername());
-        ValidationService.validateUserNameIsAvailable(usernameExists);
+        validateUsername(request);
         User user = createAndSaveUser(request);
         Profile profile = createAndSaveProfile(request, user);
         handleProfileImage(request, profile);
@@ -68,57 +67,21 @@ public class UserService {
     public void editUserProfile(Integer userId, UserProfileInfoRequest userProfileInfoRequest) {
         Profile profile = profileRepository.getReferenceById(userId);
         profileMapper.editProfile(userProfileInfoRequest, profile);
-        boolean usernameExists = userRepository.usernameExists(userProfileInfoRequest.getUsername());
-        ValidationService.validateUserNameIsAvailable(usernameExists);
-
-        if (!haveSameCityId(userProfileInfoRequest, profile)) {
-            City city = cityRepository.getReferenceById(userProfileInfoRequest.getCityId());
-            profile.setCity(city);
+        validateUsername(userProfileInfoRequest);
+        updateProfileCity(userProfileInfoRequest, profile);
+        updateProfileGender(userProfileInfoRequest, profile);
+        if (passwordEmpty(userProfileInfoRequest) && !haveSamePassword(userProfileInfoRequest, profile)) {
+            updateProfilePassword(userProfileInfoRequest, profile);
         }
-        if (!haveSameGenderId(userProfileInfoRequest, profile)) {
-            Gender gender = genderRepository.getReferenceById(userProfileInfoRequest.getGenderId());
-            profile.setGender(gender);
-        }
-        String profileImageData = userProfileInfoRequest.getProfileImage();
-        if (profileImageData != null && !profileImageData.isEmpty()) {
-            // Retrieve the user's profile image from the database
-            Optional<ProfileImage> profileImageByUserId = profileImageRepository.findProfileImageByUserId(userId);
-
-            // Check if the user already has a profile image
-            if (profileImageByUserId.isPresent()) {
-                // Update the existing profile image with the new image data
-                ProfileImage profileImage = profileImageByUserId.get();
-                profileImage.setImageData(StringConverter.stringToBytes(profileImageData));
-                profileImageRepository.save(profileImage);
-            } else {
-                // Create a new profile image for the user
-                ProfileImage newProfileImage = new ProfileImage();
-                newProfileImage.setProfile(profile);
-                newProfileImage.setImageData(StringConverter.stringToBytes(profileImageData));
-                profileImageRepository.save(newProfileImage);
-            }
-        }
+        updateProfileImage(userId, userProfileInfoRequest, profile);
 
 
         profileRepository.save(profile);
     }
 
-    private static boolean haveSameGenderId(UserProfileInfoRequest userProfileInfoRequest, Profile profile) {
-        return profile.getGender().getId().equals(userProfileInfoRequest.getGenderId());
-    }
-
-    private String getImageData(Integer userId) {
-        Optional<ProfileImage> optionalProfileImage = profileImageRepository.findProfileImageByUserId(userId);
-
-        String imageData = "";
-        if (optionalProfileImage.isPresent()) {
-            imageData = StringConverter.bytesToString(optionalProfileImage.get().getImageData());
-        }
-        return imageData;
-    }
-
-    private static boolean haveSameCityId(UserProfileInfoRequest userProfileInfoRequest, Profile profile) {
-        return profile.getCity().getId().equals(userProfileInfoRequest.getCityId());
+    private void validateUsername(UserProfileInfoRequest userProfileInfoRequest) {
+        boolean usernameExists = userRepository.usernameExists(userProfileInfoRequest.getUsername());
+        ValidationService.validateUserNameIsAvailable(usernameExists);
     }
 
 
@@ -172,5 +135,75 @@ public class UserService {
         User user = userMapper.toUser(request);
         user.setRole(role);
         return user;
+    }
+
+    private void updateProfileCity(UserProfileInfoRequest userProfileInfoRequest, Profile profile) {
+        if (!haveSameCityId(userProfileInfoRequest, profile)) {
+            City city = cityRepository.getReferenceById(userProfileInfoRequest.getCityId());
+            profile.setCity(city);
+        }
+    }
+
+    private void updateProfileGender(UserProfileInfoRequest userProfileInfoRequest, Profile profile) {
+        if (!haveSameGenderId(userProfileInfoRequest, profile)) {
+            Gender gender = genderRepository.getReferenceById(userProfileInfoRequest.getGenderId());
+            profile.setGender(gender);
+        }
+    }
+
+    private static void updateProfilePassword(UserProfileInfoRequest userProfileInfoRequest, Profile profile) {
+        String newPassword = userProfileInfoRequest.getPassword();
+        if (newPassword != null && !newPassword.isEmpty()) {
+            profile.getUser().setPassword(newPassword);
+        }
+    }
+
+    private void updateProfileImage(Integer userId, UserProfileInfoRequest userProfileInfoRequest, Profile profile) {
+        String profileImageData = userProfileInfoRequest.getProfileImage();
+        if (profileImageData != null && !profileImageData.isEmpty()) {
+            // Retrieve the user's profile image from the database
+            Optional<ProfileImage> profileImageByUserId = profileImageRepository.findProfileImageByUserId(userId);
+            // Check if the user already has a profile image
+            if (profileImageByUserId.isPresent()) {
+                // Update the existing profile image with the new image data
+                ProfileImage profileImage = profileImageByUserId.get();
+                profileImage.setImageData(StringConverter.stringToBytes(profileImageData));
+                profileImageRepository.save(profileImage);
+            } else {
+                // Create a new profile image for the user
+                ProfileImage profileImage = new ProfileImage();
+                profileImage.setProfile(profile);
+                profileImage.setImageData(StringConverter.stringToBytes(profileImageData));
+                profileImageRepository.save(profileImage);
+            }
+        }
+    }
+
+    private static boolean passwordEmpty(UserProfileInfoRequest userProfileInfoRequest) {
+        return !userProfileInfoRequest.getPassword().isEmpty();
+    }
+
+
+    private static boolean haveSameGenderId(UserProfileInfoRequest userProfileInfoRequest, Profile profile) {
+        return profile.getGender().getId().equals(userProfileInfoRequest.getGenderId());
+    }
+    private static boolean haveSamePassword(UserProfileInfoRequest userProfileInfoRequest, Profile profile) {
+        String existingPassword = profile.getUser().getPassword();
+        String newPassword = userProfileInfoRequest.getPassword();
+        // Check if both passwords are empty or if they match
+        return (existingPassword.isEmpty() && newPassword.isEmpty()) || existingPassword.equals(newPassword);
+    }
+    private String getImageData(Integer userId) {
+        Optional<ProfileImage> optionalProfileImage = profileImageRepository.findProfileImageByUserId(userId);
+
+        String imageData = "";
+        if (optionalProfileImage.isPresent()) {
+            imageData = StringConverter.bytesToString(optionalProfileImage.get().getImageData());
+        }
+        return imageData;
+    }
+
+    private static boolean haveSameCityId(UserProfileInfoRequest userProfileInfoRequest, Profile profile) {
+        return profile.getCity().getId().equals(userProfileInfoRequest.getCityId());
     }
 }
