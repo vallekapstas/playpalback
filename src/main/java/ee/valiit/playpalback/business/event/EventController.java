@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class EventController {
 
     private EventService eventService;
+
     @GetMapping("/event/{eventId}")
     @Operation(summary = "Returns details for an event by it's ID.",
             description = "Also returns the eventImage")

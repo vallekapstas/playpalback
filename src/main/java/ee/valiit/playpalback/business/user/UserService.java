@@ -2,9 +2,9 @@ package ee.valiit.playpalback.business.user;
 
 import ee.valiit.playpalback.business.Status;
 import ee.valiit.playpalback.business.user.dto.UserProfileInfoExtended;
+import ee.valiit.playpalback.business.user.dto.UserProfileInfoRequest;
 import ee.valiit.playpalback.domain.image.profileimage.ProfileImage;
 import ee.valiit.playpalback.domain.image.profileimage.ProfileImageRepository;
-import ee.valiit.playpalback.business.user.dto.UserProfileInfoRequest;
 import ee.valiit.playpalback.domain.location.city.City;
 import ee.valiit.playpalback.domain.location.city.CityMapper;
 import ee.valiit.playpalback.domain.location.city.CityRepository;
