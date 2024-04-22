@@ -32,16 +32,16 @@ public class EventService {
     public EventInfoRequest getEventData(Integer eventId) {
 
         Event event = eventRepository.getEventBy(eventId, Status.DELETED);
-        EventInfoRequest eventInfo = eventMapper.toEventInfo(event);
+        EventInfoRequest eventData = eventMapper.toEventInfo(event);
 
         Profile profile = profileRepository.findProfileByUserIdAndStatus(event.getUser().getId(), Status.ACTIVE);
-        eventInfo.setHostFirstName(profile.getFirstName());
-        eventInfo.setHostLastName(profile.getLastName());
+        eventData.setHostFirstName(profile.getFirstName());
+        eventData.setHostLastName(profile.getLastName());
 
         String imageData = getImageData(eventId);
-        eventInfo.setEventImage(imageData);
+        eventData.setEventImage(imageData);
 
-        return eventInfo;
+        return eventData;
     }
 
     private String getImageData(Integer eventId) {
