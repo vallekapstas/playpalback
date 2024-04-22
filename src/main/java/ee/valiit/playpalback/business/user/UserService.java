@@ -1,5 +1,6 @@
 package ee.valiit.playpalback.business.user;
 
+import ee.valiit.playpalback.business.Status;
 import ee.valiit.playpalback.business.user.dto.UserProfileInfoExtended;
 import ee.valiit.playpalback.business.user.dto.UserProfileInfoRequest;
 import ee.valiit.playpalback.domain.image.profileimage.ProfileImage;
