@@ -1,5 +1,6 @@
 package ee.valiit.playpalback.business.event;
 
+import ee.valiit.playpalback.business.Status;
 import ee.valiit.playpalback.domain.event.event.Event;
 import ee.valiit.playpalback.domain.event.event.EventMapper;
 import ee.valiit.playpalback.domain.event.event.EventRepository;
@@ -22,7 +23,7 @@ public class EventService {
 
     public static void getEventData(Integer eventId) {
 
-        Event event = eventRepository.getEventBy(eventId);
+        Event event = eventRepository.getEventBy(eventId, Status.DELETED);
 
 
         //    @Mapping(source = "", target = "hostFirstName")

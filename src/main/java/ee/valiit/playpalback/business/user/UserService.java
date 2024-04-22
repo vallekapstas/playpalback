@@ -58,7 +58,7 @@ public class UserService {
     }
 
     public UserProfileInfoExtended getUserData(Integer userId) {
-        Profile profile = profileRepository.findProfileByUserIdAndStatus(userId, "D");
+        Profile profile = profileRepository.findProfileByUserIdAndStatus(userId, Status.DELETED);
         String imageData = getImageData(userId);
         UserProfileInfoExtended userProfileInfoExtended = profileMapper.toUserProfileInfoExtended(profile);
         userProfileInfoExtended.setImageData(imageData);
