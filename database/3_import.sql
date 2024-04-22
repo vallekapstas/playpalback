@@ -255,6 +255,11 @@ INSERT INTO playpal.skill (name) VALUES ('Kõik on teretulnud');
 INSERT INTO playpal.skill (name) VALUES ('Algaja');
 INSERT INTO playpal.skill (name) VALUES ('Edasijõudnu');
 INSERT INTO playpal.skill (name) VALUES ('Ekspert');
+UPDATE playpal.skill SET display_order = 1000 WHERE id = 1;
+UPDATE playpal.skill SET display_order = 2000 WHERE id = 2;
+UPDATE playpal.skill SET display_order = 3000 WHERE id = 3;
+UPDATE playpal.skill SET display_order = 4000 WHERE id = 4;
+
 
 INSERT INTO playpal.location (city_id, post_code, street, longitude, latitude) VALUES (1, '10000', 'Vinge tee 3', 59.385130, 25.302980);
 INSERT INTO playpal.location (city_id, post_code, street, longitude, latitude) VALUES (124, '51004', 'Vabaduse pst 5', 58.382643, 26.724832);
@@ -280,3 +285,4 @@ INSERT INTO playpal.event_game (event_id, game_id) VALUES (2, 2);
 INSERT INTO playpal.participant (event_id, user_id, status) VALUES (1, 1, 'A');
 INSERT INTO playpal.participant (event_id, user_id, status) VALUES (1, 2, 'P');
 INSERT INTO playpal.participant (event_id, user_id, status) VALUES (2, 2, 'A');
+
