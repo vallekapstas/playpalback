@@ -13,7 +13,7 @@ public class EventController {
     @GetMapping("/event/{eventId}")
     @Operation(summary = "Returns details for an event by it's ID.",
             description = "Also returns the eventImage")
-    public void getEvent(@PathVariable Integer eventId) {
-        EventService.getEvent(eventId);
+    public void getEventData(@PathVariable Integer eventId) {
+        EventService.getEventData(eventId);
     }
 }
