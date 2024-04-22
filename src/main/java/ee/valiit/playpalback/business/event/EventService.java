@@ -1,14 +1,21 @@
 package ee.valiit.playpalback.business.event;
 
 import ee.valiit.playpalback.business.Status;
+import ee.valiit.playpalback.business.event.dto.EventInfoRequest;
 import ee.valiit.playpalback.domain.event.event.Event;
 import ee.valiit.playpalback.domain.event.event.EventMapper;
 import ee.valiit.playpalback.domain.event.event.EventRepository;
+import ee.valiit.playpalback.domain.image.eventimage.EventImage;
+import ee.valiit.playpalback.domain.image.eventimage.EventImageRepository;
+import ee.valiit.playpalback.domain.user.profile.Profile;
 import ee.valiit.playpalback.domain.user.profile.ProfileMapper;
 import ee.valiit.playpalback.domain.user.profile.ProfileRepository;
+import ee.valiit.playpalback.util.StringConverter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @Data
@@ -17,25 +24,34 @@ public class EventService {
 
     private final EventRepository eventRepository;
     private final ProfileRepository profileRepository;
+    private final EventImageRepository eventImageRepository;
 
     private final EventMapper eventMapper;
     private final ProfileMapper profileMapper;
 
-    public static void getEventData(Integer eventId) {
+    public EventInfoRequest getEventData(Integer eventId) {
 
         Event event = eventRepository.getEventBy(eventId, Status.DELETED);
+        EventInfoRequest eventInfo = eventMapper.toEventInfo(event);
 
+        Profile profile = profileRepository.findProfileByUserIdAndStatus(event.getUser().getId(), Status.ACTIVE);
+        eventInfo.setHostFirstName(profile.getFirstName());
+        eventInfo.setHostLastName(profile.getLastName());
 
-        //    @Mapping(source = "", target = "hostFirstName")
-        //    @Mapping(source = "", target = "hostLastName")
-        //    @Mapping(source = "", target = "eventImage")
+        String imageData = getImageData(eventId);
+        eventInfo.setEventImage(imageData);
 
+        return eventInfo;
+    }
 
-//        Profile profile = profileRepository.findProfileByUserIdAndStatus(userId, "D");
-//        String imageData = getImageData(userId);
-//        UserProfileInfoExtended userProfileInfoExtended = profileMapper.toUserProfileInfoExtended(profile);
-//        userProfileInfoExtended.setImageData(imageData);
-//        return userProfileInfoExtended;
+    private String getImageData(Integer eventId) {
+        Optional<EventImage> optionalEventImage = eventImageRepository.findEventImageByEventId(eventId);
 
+        String imageData = "";
+        if (optionalEventImage.isPresent()) {
+            imageData = StringConverter.bytesToString(optionalEventImage.get().getImageData());
+        }
+
+        return imageData;
     }
 }
