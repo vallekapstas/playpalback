@@ -73,7 +73,7 @@ public class UserService {
         if (passwordEmpty(userProfileInfoRequest) && !haveSamePassword(userProfileInfoRequest, profile)) {
             updateProfilePassword(userProfileInfoRequest, profile);
         }
-        updateProfileImage(userId, userProfileInfoRequest, profile);
+        updateProfileImage(userId, userProfileInfoRequest);
 
 
         profileRepository.save(profile);
@@ -158,26 +158,20 @@ public class UserService {
         }
     }
 
-    private void updateProfileImage(Integer userId, UserProfileInfoRequest userProfileInfoRequest, Profile profile) {
+    private void updateProfileImage(Integer userId, UserProfileInfoRequest userProfileInfoRequest) {
         String profileImageData = userProfileInfoRequest.getProfileImage();
-        if (profileImageData != null && !profileImageData.isEmpty()) {
-            // Retrieve the user's profile image from the database
-            Optional<ProfileImage> profileImageByUserId = profileImageRepository.findProfileImageByUserId(userId);
-            // Check if the user already has a profile image
-            if (profileImageByUserId.isPresent()) {
-                // Update the existing profile image with the new image data
-                ProfileImage profileImage = profileImageByUserId.get();
-                profileImage.setImageData(StringConverter.stringToBytes(profileImageData));
-                profileImageRepository.save(profileImage);
-            } else {
-                // Create a new profile image for the user
-                ProfileImage profileImage = new ProfileImage();
-                profileImage.setProfile(profile);
-                profileImage.setImageData(StringConverter.stringToBytes(profileImageData));
-                profileImageRepository.save(profileImage);
-            }
+        Profile profile = profileRepository.getReferenceById(userId);
+
+            profileImageRepository.deleteByProfileId(profile.getId());
+
+        if (!profileImageData.isEmpty()) {
+            ProfileImage profileImage = new ProfileImage();
+            profileImage.setProfile(profile);
+            profileImage.setImageData(StringConverter.stringToBytes(profileImageData));
+            profileImageRepository.save(profileImage);
         }
-    }
+
+        }
 
     private static boolean passwordEmpty(UserProfileInfoRequest userProfileInfoRequest) {
         return !userProfileInfoRequest.getPassword().isEmpty();
