@@ -34,13 +34,11 @@ public interface ProfileMapper {
 
 
 
-//    @Mapping(source = "username", target = "user.username")
     @Mapping(source = "firstName", target = "firstName")
     @Mapping(source = "lastName", target = "lastName")
     @Mapping(source = "birthDate", target = "birthDate")
     @Mapping(source = "interestedIn", target = "interestedIn")
     @Mapping(source = "introduction", target = "introduction")
-// manually do image
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     Profile editProfile(UserProfileInfoRequest userProfileInfoRequest, @MappingTarget Profile profile);
 
