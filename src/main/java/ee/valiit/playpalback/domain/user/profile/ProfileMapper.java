@@ -34,7 +34,7 @@ public interface ProfileMapper {
 
 
 
-    @Mapping(source = "username", target = "user.username")
+//    @Mapping(source = "username", target = "user.username")
     @Mapping(source = "firstName", target = "firstName")
     @Mapping(source = "lastName", target = "lastName")
     @Mapping(source = "birthDate", target = "birthDate")

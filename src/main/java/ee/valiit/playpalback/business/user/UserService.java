@@ -17,6 +17,7 @@ import ee.valiit.playpalback.domain.user.profile.ProfileRepository;
 import ee.valiit.playpalback.domain.user.user.User;
 import ee.valiit.playpalback.domain.user.user.UserMapper;
 import ee.valiit.playpalback.domain.user.user.UserRepository;
+import ee.valiit.playpalback.infrastructure.exception.ForbiddenException;
 import ee.valiit.playpalback.infrastructure.validation.ValidationService;
 import ee.valiit.playpalback.util.StringConverter;
 import jakarta.transaction.Transactional;
@@ -25,6 +26,8 @@ import lombok.Data;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+
+import static ee.valiit.playpalback.infrastructure.error.Error.USER_EXISTS;
 
 @Service
 @Data
@@ -67,7 +70,9 @@ public class UserService {
     public void editUserProfile(Integer userId, UserProfileInfoRequest userProfileInfoRequest) {
         Profile profile = profileRepository.getReferenceById(userId);
         profileMapper.editProfile(userProfileInfoRequest, profile);
-        validateUsername(userProfileInfoRequest);
+        String existingUsername = profile.getUser().getUsername();
+        String newUsername = userProfileInfoRequest.getUsername();
+        handleUsernameEdit(existingUsername, newUsername, profile);
         updateProfileCity(userProfileInfoRequest, profile);
         updateProfileGender(userProfileInfoRequest, profile);
         if (passwordEmpty(userProfileInfoRequest) && !haveSamePassword(userProfileInfoRequest, profile)) {
@@ -181,6 +186,7 @@ public class UserService {
     private static boolean haveSameGenderId(UserProfileInfoRequest userProfileInfoRequest, Profile profile) {
         return profile.getGender().getId().equals(userProfileInfoRequest.getGenderId());
     }
+
     private static boolean haveSamePassword(UserProfileInfoRequest userProfileInfoRequest, Profile profile) {
         String existingPassword = profile.getUser().getPassword();
         String newPassword = userProfileInfoRequest.getPassword();
@@ -196,8 +202,23 @@ public class UserService {
         }
         return imageData;
     }
-
     private static boolean haveSameCityId(UserProfileInfoRequest userProfileInfoRequest, Profile profile) {
         return profile.getCity().getId().equals(userProfileInfoRequest.getCityId());
+    }
+
+    private void handleUsernameEdit(String existingUsername, String newUsername, Profile profile) {
+        if (!existingUsername.equals(newUsername)) {
+
+            if (!newUsername.isEmpty()) {
+                boolean usernameExists = userRepository.usernameExists(newUsername);
+                if (usernameExists) {
+                    throw new ForbiddenException(USER_EXISTS.getMessage(), USER_EXISTS.getErrorCode());
+                } else {
+                    profile.getUser().setUsername(newUsername);
+                }
+            } else {
+                throw new IllegalArgumentException("New username cannot be empty");
+            }
+        }
     }
 }
