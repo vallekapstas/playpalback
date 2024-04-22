@@ -69,20 +69,44 @@ public class UserService {
 
 
     public void editUserProfile(Integer userId, UserProfileInfoRequest userProfileInfoRequest) {
-        Profile profile = profileRepository.getReferenceById(userId);
-        profileMapper.editProfile(userProfileInfoRequest, profile);
-        String existingUsername = profile.getUser().getUsername();
-        String newUsername = userProfileInfoRequest.getUsername();
-        handleUsernameEdit(existingUsername, newUsername, profile);
+        Profile profile = getProfile(userId, userProfileInfoRequest);
+        handleUsernameUpdate(userProfileInfoRequest, profile);
         updateProfileCity(userProfileInfoRequest, profile);
         updateProfileGender(userProfileInfoRequest, profile);
+        handlePasswordUpdate(userProfileInfoRequest, profile);
+        updateProfileImage(userId, userProfileInfoRequest);
+        profileRepository.save(profile);
+    }
+
+    private Profile getProfile(Integer userId, UserProfileInfoRequest userProfileInfoRequest) {
+        Profile profile = profileRepository.getReferenceById(userId);
+        profileMapper.editProfile(userProfileInfoRequest, profile);
+        return profile;
+    }
+
+    private static void handlePasswordUpdate(UserProfileInfoRequest userProfileInfoRequest, Profile profile) {
         if (passwordEmpty(userProfileInfoRequest) && !haveSamePassword(userProfileInfoRequest, profile)) {
             updateProfilePassword(userProfileInfoRequest, profile);
         }
-        updateProfileImage(userId, userProfileInfoRequest);
+    }
 
+    private void handleUsernameUpdate(UserProfileInfoRequest userProfileInfoRequest, Profile profile) {
+        String existingUsername = profile.getUser().getUsername();
+        String newUsername = userProfileInfoRequest.getUsername();
+        if (!existingUsername.equals(newUsername)) {
 
-        profileRepository.save(profile);
+            if (!newUsername.isEmpty()) {
+                boolean usernameExists = userRepository.usernameExists(newUsername);
+                if (usernameExists) {
+                    throw new ForbiddenException(USER_EXISTS.getMessage(), USER_EXISTS.getErrorCode());
+                } else {
+                    profile.getUser().setUsername(newUsername);
+                }
+            } else {
+                throw new IllegalArgumentException("New username cannot be empty");
+            }
+        }
+        ;
     }
 
     private void validateUsername(UserProfileInfoRequest userProfileInfoRequest) {
@@ -207,19 +231,5 @@ public class UserService {
         return profile.getCity().getId().equals(userProfileInfoRequest.getCityId());
     }
 
-    private void handleUsernameEdit(String existingUsername, String newUsername, Profile profile) {
-        if (!existingUsername.equals(newUsername)) {
 
-            if (!newUsername.isEmpty()) {
-                boolean usernameExists = userRepository.usernameExists(newUsername);
-                if (usernameExists) {
-                    throw new ForbiddenException(USER_EXISTS.getMessage(), USER_EXISTS.getErrorCode());
-                } else {
-                    profile.getUser().setUsername(newUsername);
-                }
-            } else {
-                throw new IllegalArgumentException("New username cannot be empty");
-            }
-        }
-    }
 }
