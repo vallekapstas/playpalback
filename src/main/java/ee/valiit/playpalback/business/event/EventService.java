@@ -1,9 +1,8 @@
 package ee.valiit.playpalback.business.event;
 
-import ee.valiit.playpalback.business.user.dto.UserProfileInfoExtended;
+import ee.valiit.playpalback.domain.event.event.Event;
 import ee.valiit.playpalback.domain.event.event.EventMapper;
 import ee.valiit.playpalback.domain.event.event.EventRepository;
-import ee.valiit.playpalback.domain.user.profile.Profile;
 import ee.valiit.playpalback.domain.user.profile.ProfileMapper;
 import ee.valiit.playpalback.domain.user.profile.ProfileRepository;
 import lombok.AllArgsConstructor;
@@ -22,6 +21,8 @@ public class EventService {
     private final ProfileMapper profileMapper;
 
     public static void getEventData(Integer eventId) {
+
+        Event event = eventRepository.getEventBy(eventId);
 
 
         //    @Mapping(source = "", target = "hostFirstName")
