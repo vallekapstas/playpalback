@@ -1,6 +1,7 @@
 package ee.valiit.playpalback.infrastructure.validation;
 
 import ee.valiit.playpalback.domain.user.user.User;
+import ee.valiit.playpalback.infrastructure.exception.DataNotFoundException;
 import ee.valiit.playpalback.infrastructure.exception.ForbiddenException;
 
 import java.util.Optional;
@@ -18,6 +19,11 @@ public class ValidationService {
         if (usernameExists) {
             throw new ForbiddenException(USER_EXISTS.getMessage(), USER_EXISTS.getErrorCode());
         }
+    }
 
+    public static void validateParticipantExists(boolean participantNotFound) {
+        if (participantNotFound) {
+            throw new DataNotFoundException(PARTICIPANT_NOT_FOUND.getMessage(), PARTICIPANT_NOT_FOUND.getErrorCode());
+        }
     }
 }

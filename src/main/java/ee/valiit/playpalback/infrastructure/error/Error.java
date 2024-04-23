@@ -4,9 +4,15 @@ import lombok.Getter;
 
 @Getter
 public enum Error {
+
     // 403
     INCORRECT_CREDENTIALS("Vale kasutajanimi või parool", 403001),
-    USER_EXISTS("Kasutajanimi on juba kasutusel", 403002);
+    USER_EXISTS("Kasutajanimi on juba kasutusel", 403002),
+
+
+    // 404
+    PARTICIPANT_NOT_FOUND("Osalejat ei leitud", 404001);
+
     private final String message;
     private final int errorCode;
 
