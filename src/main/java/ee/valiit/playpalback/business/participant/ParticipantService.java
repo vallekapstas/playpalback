@@ -14,6 +14,7 @@ import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import ee.valiit.playpalback.business.participant.dto.ParticipantCountInfo;
 
 @Service
 @Data
@@ -29,6 +30,11 @@ public class ParticipantService {
         getAndSetParticipantFirstNameAndLastName(userId, participantInfo);
         return participantInfo;
 
+    }
+
+    public ParticipantCountInfo getParticipantCountByEventId(Integer eventId) {
+        long participantCount = participantRepository.countByEventIdAndEventStatus(eventId, Status.ACTIVE);
+        return new ParticipantCountInfo(eventId, participantCount);
     }
 
     private ParticipantInfo handleParticipantInfoRequest(Integer eventId, Integer userId) {
