@@ -9,11 +9,11 @@ import lombok.Setter;
 @Setter
 public class EventsParticipatedInfo {
     private Integer userId;
-    private long participantCountByUserId;
+    private long eventCount;
 
     public EventsParticipatedInfo(Integer userId, long participantCountByUserId) {
         this.userId = userId;
-        this.participantCountByUserId = participantCountByUserId;
+        this.eventCount = participantCountByUserId;
     }
 
 }

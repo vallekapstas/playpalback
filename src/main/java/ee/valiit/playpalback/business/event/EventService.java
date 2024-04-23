@@ -2,11 +2,13 @@ package ee.valiit.playpalback.business.event;
 
 import ee.valiit.playpalback.business.Status;
 import ee.valiit.playpalback.business.event.dto.EventInfoRequest;
+import ee.valiit.playpalback.business.participant.dto.EventsParticipatedInfo;
 import ee.valiit.playpalback.domain.event.event.Event;
 import ee.valiit.playpalback.domain.event.event.EventMapper;
 import ee.valiit.playpalback.domain.event.event.EventRepository;
 import ee.valiit.playpalback.domain.image.eventimage.EventImage;
 import ee.valiit.playpalback.domain.image.eventimage.EventImageRepository;
+import ee.valiit.playpalback.domain.participant.participant.ParticipantRepository;
 import ee.valiit.playpalback.domain.user.profile.Profile;
 import ee.valiit.playpalback.domain.user.profile.ProfileMapper;
 import ee.valiit.playpalback.domain.user.profile.ProfileRepository;
@@ -25,6 +27,7 @@ public class EventService {
     private final EventRepository eventRepository;
     private final ProfileRepository profileRepository;
     private final EventImageRepository eventImageRepository;
+    private final ParticipantRepository participantRepository;
 
     private final EventMapper eventMapper;
     private final ProfileMapper profileMapper;
@@ -34,6 +37,11 @@ public class EventService {
         getAndSetHostFirstNameAndLastName(eventData);
         getAndSetEventImage(eventId, eventData);
         return eventData;
+    }
+
+    public EventsParticipatedInfo getPastEventCountByUserId(Integer userId) {
+        long countParticipationForPastEvents = participantRepository.countParticipationsForPastEvents(userId, Status.ACTIVE, Status.ACTIVE);
+        return new EventsParticipatedInfo(userId, countParticipationForPastEvents);
     }
 
     private EventInfoRequest handleEventInfoRequest(Integer eventId) {

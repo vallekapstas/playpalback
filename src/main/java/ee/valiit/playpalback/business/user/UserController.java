@@ -45,11 +45,6 @@ public class UserController {
         userService.editUserProfile(userId, userProfileInfoRequest);
     }
 
-    @GetMapping("/user/{userId}/eventcount")
-    public EventsParticipatedInfo getPastEventCountByUserId(@PathVariable Integer userId) {
-        return userService.getPastEventCountByUserId(userId);
 
-
-    }
 
 }
