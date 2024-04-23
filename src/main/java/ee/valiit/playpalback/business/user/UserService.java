@@ -1,12 +1,9 @@
 package ee.valiit.playpalback.business.user;
 
 import ee.valiit.playpalback.business.Status;
-import ee.valiit.playpalback.business.event.dto.EventInfoRequest;
 import ee.valiit.playpalback.business.participant.dto.EventsParticipatedInfo;
-import ee.valiit.playpalback.business.participant.dto.ParticipantCountInfo;
 import ee.valiit.playpalback.business.user.dto.UserProfileInfoExtended;
 import ee.valiit.playpalback.business.user.dto.UserProfileInfoRequest;
-import ee.valiit.playpalback.domain.event.event.Event;
 import ee.valiit.playpalback.domain.event.event.EventMapper;
 import ee.valiit.playpalback.domain.event.event.EventRepository;
 import ee.valiit.playpalback.domain.image.profileimage.ProfileImage;
@@ -88,7 +85,7 @@ public class UserService {
         profileRepository.save(profile);
     }
 
-    public EventsParticipatedInfo getEventCountByUserId(Integer userId) {
+    public EventsParticipatedInfo getPastEventCountByUserId(Integer userId) {
         long participantCountByUserId = participantRepository.countParticipantsForPastEvents(userId, Status.ACTIVE, Status.ACTIVE);
         return new EventsParticipatedInfo(userId, participantCountByUserId);
     }
