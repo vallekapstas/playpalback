@@ -13,7 +13,7 @@ public class SkillController {
     private SkillService skillService;
 
     @GetMapping("/skills")
-    public List<SkillInfo> skillSortOrder() {
-        return skillService.skillSortOrder();
+    public List<SkillInfo> getSkills() {
+        return skillService.getSkills();
     }
 }

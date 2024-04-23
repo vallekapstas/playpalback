@@ -16,7 +16,7 @@ public class SkillService {
     private final SkillRepository skillRepository;
     private final SkillMapper skillMapper;
 
-    public List<SkillInfo> skillSortOrder() {
+    public List<SkillInfo> getSkills() {
         List<Skill> skillByStatus = skillRepository.findSkillByStatus(Status.ACTIVE);
         return skillMapper.toSkillInfos(skillByStatus);
 
