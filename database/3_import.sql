@@ -255,10 +255,11 @@ INSERT INTO playpal.skill (name) VALUES ('Kõik on teretulnud');
 INSERT INTO playpal.skill (name) VALUES ('Algaja');
 INSERT INTO playpal.skill (name) VALUES ('Edasijõudnu');
 INSERT INTO playpal.skill (name) VALUES ('Ekspert');
-UPDATE playpal.skill SET display_order = 1000 WHERE id = 1;
-UPDATE playpal.skill SET display_order = 2000 WHERE id = 2;
-UPDATE playpal.skill SET display_order = 3000 WHERE id = 3;
-UPDATE playpal.skill SET display_order = 4000 WHERE id = 4;
+UPDATE playpal.skill SET sort_order = 1000 WHERE id = 1;
+UPDATE playpal.skill SET sort_order = 2000 WHERE id = 2;
+UPDATE playpal.skill SET sort_order = 3000 WHERE id = 3;
+UPDATE playpal.skill SET sort_order = 4000 WHERE id = 4;
+
 
 
 INSERT INTO playpal.location (city_id, post_code, street, longitude, latitude) VALUES (1, '10000', 'Vinge tee 3', 59.385130, 25.302980);

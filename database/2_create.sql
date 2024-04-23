@@ -389,7 +389,7 @@ ALTER TABLE "user"
 ;
 
 ALTER TABLE skill
-    ADD COLUMN "display_order" INTEGER;
+    ADD COLUMN "sort_order" INTEGER;
 ;
 -- End of file.
 
