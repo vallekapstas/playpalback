@@ -1,5 +1,6 @@
 package ee.valiit.playpalback.business.user;
 
+import ee.valiit.playpalback.business.participant.dto.EventsParticipatedInfo;
 import ee.valiit.playpalback.business.user.dto.UserProfileInfoExtended;
 import ee.valiit.playpalback.business.user.dto.UserProfileInfoRequest;
 import ee.valiit.playpalback.infrastructure.error.ApiError;
@@ -42,6 +43,12 @@ public class UserController {
     @PutMapping("/user/{userId}")
     public void editUserProfile(@PathVariable Integer userId, @RequestBody UserProfileInfoRequest userProfileInfoRequest) {
         userService.editUserProfile(userId, userProfileInfoRequest);
+    }
+
+    @GetMapping("/user/{userId}/eventcount")
+    public EventsParticipatedInfo getEventCountByUserId(@PathVariable Integer userId) {
+        return userService.getEventCountByUserId(userId);
+
 
     }
 
