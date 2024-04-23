@@ -388,5 +388,8 @@ ALTER TABLE "user"
                 INITIALLY IMMEDIATE
 ;
 
+ALTER TABLE skill
+    ADD COLUMN "sort_order" INTEGER;
+;
 -- End of file.
 

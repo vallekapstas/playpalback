@@ -25,4 +25,7 @@ public class Skill {
     @Column(name = "status", nullable = false, length = Integer.MAX_VALUE)
     private String status;
 
+    @Column(name = "sort_order", nullable = false)
+    private Integer sort_order;
+
 }
