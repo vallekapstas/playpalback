@@ -7,6 +7,7 @@ import ee.valiit.playpalback.domain.event.event.EventMapper;
 import ee.valiit.playpalback.domain.event.event.EventRepository;
 import ee.valiit.playpalback.domain.image.eventimage.EventImage;
 import ee.valiit.playpalback.domain.image.eventimage.EventImageRepository;
+import ee.valiit.playpalback.domain.participant.participant.ParticipantRepository;
 import ee.valiit.playpalback.domain.user.profile.Profile;
 import ee.valiit.playpalback.domain.user.profile.ProfileMapper;
 import ee.valiit.playpalback.domain.user.profile.ProfileRepository;
@@ -25,6 +26,7 @@ public class EventService {
     private final EventRepository eventRepository;
     private final ProfileRepository profileRepository;
     private final EventImageRepository eventImageRepository;
+    private final ParticipantRepository participantRepository;
 
     private final EventMapper eventMapper;
     private final ProfileMapper profileMapper;
@@ -33,6 +35,8 @@ public class EventService {
         EventInfoRequest eventData = handleEventInfoRequest(eventId);
         getAndSetHostFirstNameAndLastName(eventData);
         getAndSetEventImage(eventId, eventData);
+        getAndSetParticipantCount(eventId, eventData);
+
         return eventData;
     }
 
@@ -61,5 +65,10 @@ public class EventService {
         }
 
         return imageData;
+    }
+
+    private void getAndSetParticipantCount(Integer eventId, EventInfoRequest eventData) {
+        long participantCount = participantRepository.countByEventIdAndEventStatus(eventId, Status.ACTIVE);
+        eventData.setParticipantCount(participantCount);
     }
 }

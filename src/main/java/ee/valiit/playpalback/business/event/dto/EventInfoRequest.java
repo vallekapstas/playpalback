@@ -40,4 +40,5 @@ public class EventInfoRequest implements Serializable {
     private String countryName;
     private String eventImage;
     private String eventStatus;
+    private long participantCount;
 }

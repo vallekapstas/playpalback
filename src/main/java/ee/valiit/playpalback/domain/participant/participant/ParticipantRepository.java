@@ -7,8 +7,8 @@ public interface ParticipantRepository extends JpaRepository<Participant, Intege
     @Query("select p from Participant p where p.event.id = :eventId and p.user.id = :userId")
     Participant findParticipantByEventIdAndUserId(Integer eventId, Integer userId);
 
-    @Query("select count(p) from Participant p where p.event.id = :eventId and p.event.status = :eventStatus")
-    long countByEventIdAndEventStatus(Integer eventId, String eventStatus);
+    @Query("select count(p) from Participant p where p.event.id = :eventId and p.status = :participantStatus")
+    long countByEventIdAndEventStatus(Integer eventId, String participantStatus);
 
 
 }

@@ -31,7 +31,8 @@ public class ParticipantController {
 
     @GetMapping("/participants/count/event/{eventId}")
     @Operation(summary = "Returns a a count of participants for an event.",
-            description = "Takes eventId; if event does not exist, user count of 0 will be returned.")
+            description = "Takes eventId and filters for status = 'A' for the count; " +
+                    "if event does not exist, user count of 0 will be returned.")
     public ParticipantCountInfo getParticipantCountByEventId(@PathVariable Integer eventId) {
         return participantService.getParticipantCountByEventId(eventId);
 
