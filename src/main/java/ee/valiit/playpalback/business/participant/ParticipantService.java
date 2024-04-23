@@ -8,15 +8,17 @@ import ee.valiit.playpalback.domain.participant.participant.ParticipantRepositor
 import ee.valiit.playpalback.domain.user.profile.Profile;
 import ee.valiit.playpalback.domain.user.profile.ProfileRepository;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.springframework.stereotype.Service;
 
 @Service
+@Data
 @AllArgsConstructor
 public class ParticipantService {
-    private static ParticipantRepository participantRepository;
-    private static ProfileRepository profileRepository;
+    private final ParticipantRepository participantRepository;
+    private final ProfileRepository profileRepository;
 
-    private static ParticipantMapper participantMapper;
+    private final ParticipantMapper participantMapper;
 
     public ParticipantInfo getParticipantOfEvent(Integer eventId, Integer userId) {
         ParticipantInfo participantInfo = handleParticipantInfoRequest(eventId, userId);
@@ -25,15 +27,14 @@ public class ParticipantService {
 
     }
 
-    private static void getAndSetParticipantFirstNameAndLastName(Integer userId, ParticipantInfo participantInfo) {
+    private ParticipantInfo handleParticipantInfoRequest(Integer eventId, Integer userId) {
+        Participant participant = participantRepository.findParticipantByEventIdAndUserId(eventId, userId);
+        return participantMapper.toParticipantInfo(participant);
+    }
+
+    private void getAndSetParticipantFirstNameAndLastName(Integer userId, ParticipantInfo participantInfo) {
         Profile profile = profileRepository.findProfileByUserIdAndStatus(userId, Status.DELETED);
         participantInfo.setFirstName(profile.getFirstName());
         participantInfo.setLastName(profile.getLastName());
-    }
-
-    private static ParticipantInfo handleParticipantInfoRequest(Integer eventId, Integer userId) {
-        Participant participant = participantRepository.findParticipantByEventIdAndUserId(eventId, userId);
-        ParticipantInfo participantInfo = participantMapper.toParticipantInfo(participant);
-        return participantInfo;
     }
 }
