@@ -1,8 +1,8 @@
 package ee.valiit.playpalback.business.participant;
 
 import ee.valiit.playpalback.business.Status;
+import ee.valiit.playpalback.business.participant.dto.ParticipantCountInfo;
 import ee.valiit.playpalback.business.participant.dto.ParticipantInfo;
-import ee.valiit.playpalback.business.user.dto.UserProfileInfoRequest;
 import ee.valiit.playpalback.domain.participant.participant.Participant;
 import ee.valiit.playpalback.domain.participant.participant.ParticipantMapper;
 import ee.valiit.playpalback.domain.participant.participant.ParticipantRepository;
@@ -11,10 +11,7 @@ import ee.valiit.playpalback.domain.user.profile.ProfileRepository;
 import ee.valiit.playpalback.infrastructure.validation.ValidationService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
-import ee.valiit.playpalback.business.participant.dto.ParticipantCountInfo;
 
 @Service
 @Data

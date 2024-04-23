@@ -1,8 +1,10 @@
 package ee.valiit.playpalback.domain.participant.participant;
 
 import ee.valiit.playpalback.business.participant.dto.ParticipantInfo;
-import ee.valiit.playpalback.domain.participant.participant.Participant;
-import org.mapstruct.*;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingConstants;
+import org.mapstruct.ReportingPolicy;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)
 public interface ParticipantMapper {
