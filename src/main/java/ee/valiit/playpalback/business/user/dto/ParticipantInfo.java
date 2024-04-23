@@ -1,5 +1,6 @@
-package ee.valiit.playpalback.domain.participant.participant;
+package ee.valiit.playpalback.business.user.dto;
 
+import ee.valiit.playpalback.domain.participant.participant.Participant;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,7 +13,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ParticipantDto implements Serializable {
+public class ParticipantInfo implements Serializable {
     private Integer eventId;
     private long participantCount;
 
