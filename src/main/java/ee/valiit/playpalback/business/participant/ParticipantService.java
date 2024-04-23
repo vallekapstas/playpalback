@@ -1,6 +1,6 @@
-package ee.valiit.playpalback.business.Participant;
+package ee.valiit.playpalback.business.participant;
 
-import ee.valiit.playpalback.business.Participant.dto.ParticipantCountInfo;
+import ee.valiit.playpalback.business.participant.dto.ParticipantCountInfo;
 import ee.valiit.playpalback.business.Status;
 import ee.valiit.playpalback.domain.participant.participant.ParticipantRepository;
 import lombok.AllArgsConstructor;

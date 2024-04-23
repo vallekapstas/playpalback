@@ -1,4 +1,4 @@
-package ee.valiit.playpalback.business.Participant.dto;
+package ee.valiit.playpalback.business.participant.dto;
 
 import lombok.Data;
 import lombok.Getter;
