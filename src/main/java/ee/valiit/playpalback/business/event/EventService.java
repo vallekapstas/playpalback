@@ -40,6 +40,7 @@ public class EventService {
         return eventData;
     }
 
+
     private EventInfoRequest handleEventInfoRequest(Integer eventId) {
         Event event = eventRepository.getEventBy(eventId, Status.DELETED);
         return eventMapper.toEventInfo(event);

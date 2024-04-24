@@ -1,13 +1,17 @@
 package ee.valiit.playpalback.business.user;
 
 import ee.valiit.playpalback.business.Status;
+import ee.valiit.playpalback.business.participant.dto.EventsParticipatedInfo;
 import ee.valiit.playpalback.business.user.dto.UserProfileInfoExtended;
 import ee.valiit.playpalback.business.user.dto.UserProfileInfoRequest;
+import ee.valiit.playpalback.domain.event.event.EventMapper;
+import ee.valiit.playpalback.domain.event.event.EventRepository;
 import ee.valiit.playpalback.domain.image.profileimage.ProfileImage;
 import ee.valiit.playpalback.domain.image.profileimage.ProfileImageRepository;
 import ee.valiit.playpalback.domain.location.city.City;
 import ee.valiit.playpalback.domain.location.city.CityMapper;
 import ee.valiit.playpalback.domain.location.city.CityRepository;
+import ee.valiit.playpalback.domain.participant.participant.ParticipantRepository;
 import ee.valiit.playpalback.domain.participant.role.Role;
 import ee.valiit.playpalback.domain.participant.role.RoleRepository;
 import ee.valiit.playpalback.domain.user.gender.Gender;
@@ -36,14 +40,17 @@ import static ee.valiit.playpalback.infrastructure.error.Error.USER_EXISTS;
 public class UserService {
     private final UserRepository userRepository;
     private final CityRepository cityRepository;
+    private final RoleRepository roleRepository;
+    private final EventRepository eventRepository;
     private final GenderRepository genderRepository;
     private final ProfileRepository profileRepository;
+    private final ParticipantRepository participantRepository;
+    private final ProfileImageRepository profileImageRepository;
 
     private final UserMapper userMapper;
     private final CityMapper cityMapper;
+    private final EventMapper eventMapper;
     private final ProfileMapper profileMapper;
-    private final RoleRepository roleRepository;
-    private final ProfileImageRepository profileImageRepository;
 
 
     public boolean getUserNameExists(String userName) {
@@ -77,6 +84,12 @@ public class UserService {
         updateProfileImage(userId, userProfileInfoRequest);
         profileRepository.save(profile);
     }
+
+    public EventsParticipatedInfo getPastEventCountByUserId(Integer userId) {
+        long countParticipationForPastEvents = participantRepository.countParticipationForPastEvents(userId, Status.ACTIVE, Status.ACTIVE);
+        return new EventsParticipatedInfo(userId, countParticipationForPastEvents);
+    }
+
 
     private void validateUsername(UserProfileInfoRequest userProfileInfoRequest) {
         boolean usernameExists = userRepository.usernameExists(userProfileInfoRequest.getUsername());
@@ -181,7 +194,7 @@ public class UserService {
         String profileImageData = userProfileInfoRequest.getProfileImage();
         Profile profile = profileRepository.getReferenceById(userId);
 
-            profileImageRepository.deleteByProfileId(profile.getId());
+        profileImageRepository.deleteByProfileId(profile.getId());
 
         if (!profileImageData.isEmpty()) {
             ProfileImage profileImage = new ProfileImage();
@@ -190,7 +203,8 @@ public class UserService {
             profileImageRepository.save(profileImage);
         }
 
-        }
+    }
+
     private String getImageData(Integer userId) {
         Optional<ProfileImage> optionalProfileImage = profileImageRepository.findProfileImageByUserId(userId);
 
@@ -230,6 +244,6 @@ public class UserService {
                 throw new IllegalArgumentException("New username cannot be empty");
             }
         }
-        ;
+
     }
 }

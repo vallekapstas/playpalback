@@ -20,4 +20,6 @@ public class EventController {
     public EventInfoRequest getEventData(@PathVariable Integer eventId) {
         return eventService.getEventData(eventId);
     }
+
+
 }
