@@ -13,6 +13,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Data
 @AllArgsConstructor
@@ -32,6 +34,18 @@ public class ParticipantService {
     public ParticipantCountInfo getParticipantCountByEventId(Integer eventId) {
         long participantCount = participantRepository.countByEventIdAndEventStatus(eventId, Status.ACTIVE);
         return new ParticipantCountInfo(eventId, participantCount);
+    }
+
+    public List<ParticipantInfo> getListOfParticipants(Integer eventId) {
+        List<Participant> participants = participantRepository.findParticipantList(eventId, Status.DELETED);
+        List<ParticipantInfo> participantInfos = participantMapper.toParticipantInfos(participants);
+        for (ParticipantInfo participantInfo : participantInfos) {
+            Profile profile = profileRepository.getReferenceById(participantInfo.getUserId());
+            participantInfo.setFirstName(profile.getFirstName());
+            participantInfo.setLastName(profile.getLastName());
+        }
+        return participantInfos;
+
     }
 
     private ParticipantInfo handleParticipantInfoRequest(Integer eventId, Integer userId) {

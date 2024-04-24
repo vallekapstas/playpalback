@@ -6,6 +6,8 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.ReportingPolicy;
 
+import java.util.List;
+
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)
 public interface ParticipantMapper {
     @Mapping(source = "id", target = "participantId")
@@ -14,4 +16,8 @@ public interface ParticipantMapper {
     @Mapping(source = "user.username", target = "userName")
     @Mapping(source = "status", target = "status")
     ParticipantInfo toParticipantInfo(Participant participant);
+
+    List<ParticipantInfo> toParticipantInfos(List<Participant> participants);
+
+
 }

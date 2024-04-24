@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 public class ParticipantController {
@@ -36,5 +38,12 @@ public class ParticipantController {
     public ParticipantCountInfo getParticipantCountByEventId(@PathVariable Integer eventId) {
         return participantService.getParticipantCountByEventId(eventId);
 
+    }
+
+    @GetMapping("/participants/event/{eventId}")
+    @Operation(summary = "Get participants by event.",
+            description = "Retrieve a list of participants related to a certain event. By default, filters by status != 'D'.")
+    public List<ParticipantInfo> getListOfParticipants(@PathVariable Integer eventId) {
+        return participantService.getListOfParticipants(eventId);
     }
 }
