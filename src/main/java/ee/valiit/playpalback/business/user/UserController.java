@@ -42,7 +42,7 @@ public class UserController {
     }
 
     @PutMapping("/user/{userId}")
-    @Operation(summary = "Editing an existing user", description = "interestedIn, introduction and userImage are not required; password field also not requered — if empty, no update but if filled, password will be updated")
+    @Operation(summary = "Editing an existing user",description = "interestedIn, introduction and userImage are not required")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "403", description = "This username is already taken", content = @Content(schema = @Schema(implementation = ApiError.class)))})
