@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,5 +37,12 @@ public class ParticipantController {
     public ParticipantCountInfo getParticipantCountByEventId(@PathVariable Integer eventId) {
         return participantService.getParticipantCountByEventId(eventId);
 
+    }
+
+    @DeleteMapping("/participant/{participantId}")
+    @Operation(summary = "Delete a participant.",
+            description = "Removes a participant from the participant table based on the provided participantId.")
+    public void deleteParticipant(@PathVariable Integer participantId) {
+        participantService.deleteParticipant(participantId);
     }
 }

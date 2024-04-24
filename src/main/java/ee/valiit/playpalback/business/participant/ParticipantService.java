@@ -34,6 +34,11 @@ public class ParticipantService {
         return new ParticipantCountInfo(eventId, participantCount);
     }
 
+    public void deleteParticipant(Integer participantId) {
+        Participant participant = participantRepository.getReferenceById(participantId);
+        participantRepository.delete(participant);
+    }
+
     private ParticipantInfo handleParticipantInfoRequest(Integer eventId, Integer userId) {
         Participant participant = participantRepository.findParticipantByEventIdAndUserId(eventId, userId);
         validateParticipant(participant);
