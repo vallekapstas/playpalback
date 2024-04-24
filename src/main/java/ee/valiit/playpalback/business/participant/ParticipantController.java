@@ -1,5 +1,6 @@
 package ee.valiit.playpalback.business.participant;
 
+import ee.valiit.playpalback.business.participant.dto.AddParticipantToEventRequest;
 import ee.valiit.playpalback.business.participant.dto.ParticipantCountInfo;
 import ee.valiit.playpalback.business.participant.dto.ParticipantInfo;
 import ee.valiit.playpalback.infrastructure.error.ApiError;
@@ -9,9 +10,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
@@ -35,6 +34,14 @@ public class ParticipantController {
                     "if event does not exist, user count of 0 will be returned.")
     public ParticipantCountInfo getParticipantCountByEventId(@PathVariable Integer eventId) {
         return participantService.getParticipantCountByEventId(eventId);
+
+    }
+
+    @PostMapping("/participant")
+    @Operation(summary = "Create a new participant",
+            description = "Accepts a request body containing the user ID and event ID. The status of the newly added participant is set to pending ('P').")
+    public void addParticipant(@RequestBody AddParticipantToEventRequest addParticipantToEventRequest) {
+        participantService.addParticipant(addParticipantToEventRequest);
 
     }
 }

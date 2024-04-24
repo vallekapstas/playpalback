@@ -1,5 +1,7 @@
 package ee.valiit.playpalback.domain.participant.participant;
 
+import ee.valiit.playpalback.business.Status;
+import ee.valiit.playpalback.business.participant.dto.AddParticipantToEventRequest;
 import ee.valiit.playpalback.business.participant.dto.ParticipantInfo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -14,4 +16,8 @@ public interface ParticipantMapper {
     @Mapping(source = "user.username", target = "userName")
     @Mapping(source = "status", target = "status")
     ParticipantInfo toParticipantInfo(Participant participant);
+
+
+    @Mapping(constant = Status.PENDING, target = "status")
+    Participant toParticipant(AddParticipantToEventRequest addParticipantToEventRequest);
 }
