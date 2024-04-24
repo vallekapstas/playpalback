@@ -1,5 +1,6 @@
 package ee.valiit.playpalback.domain.user.profile;
 
+import ee.valiit.playpalback.business.user.dto.UserProfileInfoEdit;
 import ee.valiit.playpalback.business.user.dto.UserProfileInfoExtended;
 import ee.valiit.playpalback.business.user.dto.UserProfileInfoRequest;
 import org.mapstruct.*;
@@ -40,7 +41,7 @@ public interface ProfileMapper {
     @Mapping(source = "interestedIn", target = "interestedIn")
     @Mapping(source = "introduction", target = "introduction")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    Profile editProfile(UserProfileInfoRequest userProfileInfoRequest, @MappingTarget Profile profile);
+    Profile editProfile(UserProfileInfoEdit UserProfileInfoEdit, @MappingTarget Profile profile);
 
 
 }

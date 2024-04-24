@@ -2,6 +2,7 @@ package ee.valiit.playpalback.business.user;
 
 import ee.valiit.playpalback.business.Status;
 import ee.valiit.playpalback.business.participant.dto.EventsParticipatedInfo;
+import ee.valiit.playpalback.business.user.dto.UserProfileInfoEdit;
 import ee.valiit.playpalback.business.user.dto.UserProfileInfoExtended;
 import ee.valiit.playpalback.business.user.dto.UserProfileInfoRequest;
 import ee.valiit.playpalback.domain.event.event.EventMapper;
@@ -75,13 +76,12 @@ public class UserService {
     }
 
 
-    public void editUserProfile(Integer userId, UserProfileInfoRequest userProfileInfoRequest) {
-        Profile profile = getProfile(userId, userProfileInfoRequest);
-        handleUsernameUpdate(userProfileInfoRequest, profile);
-        updateProfileCity(userProfileInfoRequest, profile);
-        updateProfileGender(userProfileInfoRequest, profile);
-        handlePasswordUpdate(userProfileInfoRequest, profile);
-        updateProfileImage(userId, userProfileInfoRequest);
+    public void editUserProfile(Integer userId, UserProfileInfoEdit UserProfileInfoEdit) {
+        Profile profile = getProfile(userId, UserProfileInfoEdit);
+        handleUsernameUpdate(UserProfileInfoEdit, profile);
+        updateProfileCity(UserProfileInfoEdit, profile);
+        updateProfileGender(UserProfileInfoEdit, profile);
+        updateProfileImage(userId, UserProfileInfoEdit);
         profileRepository.save(profile);
     }
 
@@ -149,48 +149,31 @@ public class UserService {
         return user;
     }
 
-    private void updateProfileCity(UserProfileInfoRequest userProfileInfoRequest, Profile profile) {
-        if (!haveSameCityId(userProfileInfoRequest, profile)) {
-            City city = cityRepository.getReferenceById(userProfileInfoRequest.getCityId());
+    private void updateProfileCity(UserProfileInfoEdit UserProfileInfoEdit, Profile profile) {
+        if (!haveSameCityId(UserProfileInfoEdit, profile)) {
+            City city = cityRepository.getReferenceById(UserProfileInfoEdit.getCityId());
             profile.setCity(city);
         }
     }
 
-    private static boolean haveSameCityId(UserProfileInfoRequest userProfileInfoRequest, Profile profile) {
+    private static boolean haveSameCityId(UserProfileInfoEdit userProfileInfoRequest, Profile profile) {
         return profile.getCity().getId().equals(userProfileInfoRequest.getCityId());
     }
 
-    private void updateProfileGender(UserProfileInfoRequest userProfileInfoRequest, Profile profile) {
-        if (!haveSameGenderId(userProfileInfoRequest, profile)) {
-            Gender gender = genderRepository.getReferenceById(userProfileInfoRequest.getGenderId());
+    private void updateProfileGender(UserProfileInfoEdit UserProfileInfoEdit, Profile profile) {
+        if (!haveSameGenderId(UserProfileInfoEdit, profile)) {
+            Gender gender = genderRepository.getReferenceById(UserProfileInfoEdit.getGenderId());
             profile.setGender(gender);
         }
     }
 
-    private static boolean haveSameGenderId(UserProfileInfoRequest userProfileInfoRequest, Profile profile) {
-        return profile.getGender().getId().equals(userProfileInfoRequest.getGenderId());
-    }
-
-    private static void updateProfilePassword(UserProfileInfoRequest userProfileInfoRequest, Profile profile) {
-        String newPassword = userProfileInfoRequest.getPassword();
-        if (newPassword != null && !newPassword.isEmpty()) {
-            profile.getUser().setPassword(newPassword);
-        }
-    }
-
-    private static boolean passwordEmpty(UserProfileInfoRequest userProfileInfoRequest) {
-        return !userProfileInfoRequest.getPassword().isEmpty();
+    private static boolean haveSameGenderId(UserProfileInfoEdit UserProfileInfoEdit, Profile profile) {
+        return profile.getGender().getId().equals(UserProfileInfoEdit.getGenderId());
     }
 
 
-    private static boolean haveSamePassword(UserProfileInfoRequest userProfileInfoRequest, Profile profile) {
-        String existingPassword = profile.getUser().getPassword();
-        String newPassword = userProfileInfoRequest.getPassword();
-        // Check if both passwords are empty or if they match
-        return (existingPassword.isEmpty() && newPassword.isEmpty()) || existingPassword.equals(newPassword);
-    }
 
-    private void updateProfileImage(Integer userId, UserProfileInfoRequest userProfileInfoRequest) {
+    private void updateProfileImage(Integer userId, UserProfileInfoEdit userProfileInfoRequest) {
         String profileImageData = userProfileInfoRequest.getProfileImage();
         Profile profile = profileRepository.getReferenceById(userId);
 
@@ -216,19 +199,15 @@ public class UserService {
     }
 
 
-    private Profile getProfile(Integer userId, UserProfileInfoRequest userProfileInfoRequest) {
+    private Profile getProfile(Integer userId, UserProfileInfoEdit UserProfileInfoEdit) {
         Profile profile = profileRepository.getReferenceById(userId);
-        profileMapper.editProfile(userProfileInfoRequest, profile);
+        profileMapper.editProfile(UserProfileInfoEdit, profile);
         return profile;
     }
 
-    private static void handlePasswordUpdate(UserProfileInfoRequest userProfileInfoRequest, Profile profile) {
-        if (passwordEmpty(userProfileInfoRequest) && !haveSamePassword(userProfileInfoRequest, profile)) {
-            updateProfilePassword(userProfileInfoRequest, profile);
-        }
-    }
 
-    private void handleUsernameUpdate(UserProfileInfoRequest userProfileInfoRequest, Profile profile) {
+
+    private void handleUsernameUpdate(UserProfileInfoEdit userProfileInfoRequest, Profile profile) {
         String existingUsername = profile.getUser().getUsername();
         String newUsername = userProfileInfoRequest.getUsername();
         if (!existingUsername.equals(newUsername)) {

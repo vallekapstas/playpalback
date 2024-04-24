@@ -1,6 +1,7 @@
 package ee.valiit.playpalback.business.user;
 
 import ee.valiit.playpalback.business.participant.dto.EventsParticipatedInfo;
+import ee.valiit.playpalback.business.user.dto.UserProfileInfoEdit;
 import ee.valiit.playpalback.business.user.dto.UserProfileInfoExtended;
 import ee.valiit.playpalback.business.user.dto.UserProfileInfoRequest;
 import ee.valiit.playpalback.infrastructure.error.ApiError;
@@ -45,8 +46,8 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "403", description = "This username is already taken", content = @Content(schema = @Schema(implementation = ApiError.class)))})
-    public void editUserProfile(@PathVariable Integer userId, @RequestBody UserProfileInfoRequest userProfileInfoRequest) {
-        userService.editUserProfile(userId, userProfileInfoRequest);
+    public void editUserProfile(@PathVariable Integer userId, @RequestBody UserProfileInfoEdit UserProfileInfoEdit) {
+        userService.editUserProfile(userId, UserProfileInfoEdit);
     }
 
     @GetMapping("/user/{userId}/eventcount")
