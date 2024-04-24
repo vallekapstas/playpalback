@@ -4,6 +4,8 @@ INSERT INTO playpal.role (name) VALUES ('Kasutaja');
 INSERT INTO playpal."user" (username, password, role_id) VALUES ('rain', '123', 2);
 INSERT INTO playpal."user" (username, password, role_id) VALUES ('juku', '123', 2);
 INSERT INTO playpal."user" (username, password, role_id) VALUES ('admin', '123', 1);
+INSERT INTO playpal."user" (username, password, role_id) VALUES ('Pets', '123', 2);
+INSERT INTO playpal."user" (username, password, role_id) VALUES ('Jaan', '123', 2);
 
 INSERT INTO playpal.gender (name) VALUES ('Naine');
 INSERT INTO playpal.gender (name) VALUES ('Mees');
@@ -248,8 +250,10 @@ INSERT INTO playpal.city (county_id, name) VALUES (15, 'Paralepa');
 INSERT INTO playpal.city (county_id, name) VALUES (15, 'Taebla');
 
 INSERT INTO playpal.profile (user_id, gender_id, city_id, first_name, last_name, birth_date, interested_in, introduction) VALUES (1, 2, 1, 'Rain', 'Tüür', '1900-01-01', 'EVERY! THING!??!!', 'Jah');
-INSERT INTO playpal.profile (user_id, gender_id, city_id, first_name, last_name, birth_date, interested_in, introduction) VALUES (2, 2, 1, 'Juku', 'Pauk', '2014-01-01', 'mängimine, MINECRAFT!!!', 'lit');
-INSERT INTO playpal.profile (user_id, gender_id, city_id, first_name, last_name, birth_date, interested_in, introduction) VALUES (3, 2, 1, 'Suur', 'Kärss', '2064-01-01', 'Administreerimine', 'Ma näen kõike');
+INSERT INTO playpal.profile (user_id, gender_id, city_id, first_name, last_name, birth_date, interested_in, introduction) VALUES (2, 2, 5, 'Juku', 'Pauk', '2014-01-01', 'mängimine, MINECRAFT!!!', 'lit');
+INSERT INTO playpal.profile (user_id, gender_id, city_id, first_name, last_name, birth_date, interested_in, introduction) VALUES (3, 2, 25, 'Suur', 'Kärss', '2064-01-01', 'Administreerimine', 'Ma näen kõike');
+INSERT INTO playpal.profile (user_id, gender_id, city_id, first_name, last_name, birth_date, interested_in, introduction) VALUES (4, 2, 45, 'Cash', 'Money', '2064-01-01', 'raha', 'rahaboss');
+INSERT INTO playpal.profile (user_id, gender_id, city_id, first_name, last_name, birth_date, interested_in, introduction) VALUES (5, 1, 66, 'Heli', 'Looja', '2064-01-01', 'Muusika', 'Mu vanemad on heliloojad');
 
 INSERT INTO playpal.skill (name) VALUES ('Kõik on teretulnud');
 INSERT INTO playpal.skill (name) VALUES ('Algaja');
@@ -264,9 +268,18 @@ UPDATE playpal.skill SET sort_order = 4000 WHERE id = 4;
 
 INSERT INTO playpal.location (city_id, post_code, street, longitude, latitude) VALUES (1, '10000', 'Vinge tee 3', 59.385130, 25.302980);
 INSERT INTO playpal.location (city_id, post_code, street, longitude, latitude) VALUES (124, '51004', 'Vabaduse pst 5', 58.382643, 26.724832);
+INSERT INTO playpal.location (city_id, post_code, street, longitude, latitude) VALUES (121, '51004', 'Tamme tee 6', 58.382643, 26.724832);
+INSERT INTO playpal.location (city_id, post_code, street, longitude, latitude) VALUES (122, '51004', 'Kase tn 8', 58.382643, 26.724832);
+INSERT INTO playpal.location (city_id, post_code, street, longitude, latitude) VALUES (123, '51004', 'Paju pst 5', 58.382643, 26.724832);
+INSERT INTO playpal.location (city_id, post_code, street, longitude, latitude) VALUES (100, '51004', 'Lõkke 666', 58.382643, 26.724832);
 
 INSERT INTO playpal.event (user_id, name, venue, start_date, end_date, start_time, end_time, min_players, max_players, min_age, max_age, fee, skill_id, location_id) VALUES (1, 'Monopolyõhtu Raini juures', 'Raini pleiss', '2024-05-04', '2024-05-04', '16:00:00', '22:00:00', 4, 8, 18, 125, null, 1, 1);
 INSERT INTO playpal.event (user_id, name, venue, start_date, end_date, start_time, end_time, min_players, max_players, fee, skill_id, location_id) VALUES (2, 'Wingspan @ Naiiv', 'Naiiv', '2024-05-05', '2024-05-05', '18:00:00', '21:30:00', 3, 5, 5.00, 2, 2);
+INSERT INTO playpal.event (user_id, name, venue, start_date, end_date, start_time, end_time, min_players, max_players, fee, skill_id, location_id) VALUES (3, 'Alias koopas', 'koobas', '2024-03-03', '2024-03-03', '18:00:00', '21:30:00', 1, 5, 7.00, 1, 4);
+INSERT INTO playpal.event (user_id, name, venue, start_date, end_date, start_time, end_time, min_players, max_players, fee, skill_id, location_id) VALUES (3, 'Linnade põletamine Petsi pool', 'Pets House', '2024-02-03', '2024-03-03', '18:00:00', '21:30:00', 2, 12, 2.00, 2, 3);
+INSERT INTO playpal.event (user_id, name, venue, start_date, end_date, start_time, end_time, min_players, max_players, fee, skill_id, location_id) VALUES (3, 'Turakas Türgis', 'Türkland', '2024-06-06', '2024-06-07', '12:00:00', '21:00:00', 0, 8, 0.00, 2, 4);
+INSERT INTO playpal.event (user_id, name, venue, start_date, end_date, start_time, end_time, min_players, max_players, fee, skill_id, location_id) VALUES (3, 'Catan jaanipäeval', 'Fire', '2024-02-02', '2024-02-02', '12:00:00', '21:00:00', 1, 99, 0.00, 1, 6);
+INSERT INTO playpal.event (user_id, name, venue, start_date, end_date, start_time, end_time, min_players, max_players, fee, skill_id, location_id) VALUES (3, 'Reis ümber maailma', 'Underworld', '2024-01-02', '2024-02-03', '12:00:00', '23:00:00', 1, 7, 0.00, 4, 5);
 
 INSERT INTO playpal.game (name) VALUES ('Monopoly');
 INSERT INTO playpal.game (name) VALUES ('Wingspan');
@@ -285,5 +298,12 @@ INSERT INTO playpal.event_game (event_id, game_id) VALUES (2, 2);
 
 INSERT INTO playpal.participant (event_id, user_id, status) VALUES (1, 1, 'A');
 INSERT INTO playpal.participant (event_id, user_id, status) VALUES (1, 2, 'P');
-INSERT INTO playpal.participant (event_id, user_id, status) VALUES (2, 2, 'A');
+INSERT INTO playpal.participant (event_id, user_id, status) VALUES (3, 2, 'A');
+INSERT INTO playpal.participant (event_id, user_id, status) VALUES (4, 2, 'A');
+INSERT INTO playpal.participant (event_id, user_id, status) VALUES (3, 1, 'D');
+INSERT INTO playpal.participant (event_id, user_id, status) VALUES (4, 1, 'A');
+INSERT INTO playpal.participant (event_id, user_id, status) VALUES (3, 3, 'A');
+INSERT INTO playpal.participant (event_id, user_id, status) VALUES (4, 3, 'D');
+INSERT INTO playpal.participant (event_id, user_id, status) VALUES (5, 3, 'A');
+INSERT INTO playpal.participant (event_id, user_id, status) VALUES (5, 4, 'A');
 
