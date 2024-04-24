@@ -2,7 +2,6 @@ package ee.valiit.playpalback.business.event;
 
 import ee.valiit.playpalback.business.Status;
 import ee.valiit.playpalback.business.event.dto.EventInfoRequest;
-import ee.valiit.playpalback.business.participant.dto.EventsParticipatedInfo;
 import ee.valiit.playpalback.domain.event.event.Event;
 import ee.valiit.playpalback.domain.event.event.EventMapper;
 import ee.valiit.playpalback.domain.event.event.EventRepository;
@@ -39,10 +38,6 @@ public class EventService {
         return eventData;
     }
 
-    public EventsParticipatedInfo getPastEventCountByUserId(Integer userId) {
-        long countParticipationForPastEvents = participantRepository.countParticipationsForPastEvents(userId, Status.ACTIVE, Status.ACTIVE);
-        return new EventsParticipatedInfo(userId, countParticipationForPastEvents);
-    }
 
     private EventInfoRequest handleEventInfoRequest(Integer eventId) {
         Event event = eventRepository.getEventBy(eventId, Status.DELETED);

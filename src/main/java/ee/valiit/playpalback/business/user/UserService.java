@@ -1,6 +1,7 @@
 package ee.valiit.playpalback.business.user;
 
 import ee.valiit.playpalback.business.Status;
+import ee.valiit.playpalback.business.participant.dto.EventsParticipatedInfo;
 import ee.valiit.playpalback.business.user.dto.UserProfileInfoExtended;
 import ee.valiit.playpalback.business.user.dto.UserProfileInfoRequest;
 import ee.valiit.playpalback.domain.event.event.EventMapper;
@@ -10,6 +11,7 @@ import ee.valiit.playpalback.domain.image.profileimage.ProfileImageRepository;
 import ee.valiit.playpalback.domain.location.city.City;
 import ee.valiit.playpalback.domain.location.city.CityMapper;
 import ee.valiit.playpalback.domain.location.city.CityRepository;
+import ee.valiit.playpalback.domain.participant.participant.ParticipantRepository;
 import ee.valiit.playpalback.domain.participant.role.Role;
 import ee.valiit.playpalback.domain.participant.role.RoleRepository;
 import ee.valiit.playpalback.domain.user.gender.Gender;
@@ -42,6 +44,7 @@ public class UserService {
     private final EventRepository eventRepository;
     private final GenderRepository genderRepository;
     private final ProfileRepository profileRepository;
+    private final ParticipantRepository participantRepository;
     private final ProfileImageRepository profileImageRepository;
 
     private final UserMapper userMapper;
@@ -82,6 +85,10 @@ public class UserService {
         profileRepository.save(profile);
     }
 
+    public EventsParticipatedInfo getPastEventCountByUserId(Integer userId) {
+        long countParticipationForPastEvents = participantRepository.countParticipationForPastEvents(userId, Status.ACTIVE, Status.ACTIVE);
+        return new EventsParticipatedInfo(userId, countParticipationForPastEvents);
+    }
 
 
     private void validateUsername(UserProfileInfoRequest userProfileInfoRequest) {
@@ -237,6 +244,6 @@ public class UserService {
                 throw new IllegalArgumentException("New username cannot be empty");
             }
         }
-        ;
+
     }
 }

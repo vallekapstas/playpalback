@@ -11,6 +11,6 @@ public interface ParticipantRepository extends JpaRepository<Participant, Intege
     long countByEventIdAndEventStatus(Integer eventId, String eventStatus);
 
     @Query("select count(p) from Participant p JOIN p.event e where p.user.id = :userId and p.event.status=:eventStatus and p.status=:participantStatus and e.endDate < CURRENT TIMESTAMP ")
-    long countParticipationsForPastEvents(Integer userId, String eventStatus, String participantStatus);
+    long countParticipationForPastEvents(Integer userId, String eventStatus, String participantStatus);
 
 }

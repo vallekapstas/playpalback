@@ -41,10 +41,20 @@ public class UserController {
     }
 
     @PutMapping("/user/{userId}")
+    @Operation(summary = "Editing an existing user", description = "interestedIn, introduction and userImage are not required; password field also not requered — if empty, no update but if filled, password will be updated")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "403", description = "This username is already taken", content = @Content(schema = @Schema(implementation = ApiError.class)))})
     public void editUserProfile(@PathVariable Integer userId, @RequestBody UserProfileInfoRequest userProfileInfoRequest) {
         userService.editUserProfile(userId, userProfileInfoRequest);
     }
 
+    @GetMapping("/user/{userId}/eventcount")
+    @Operation(summary = "Returns past event count by userId.",
+            description = "Returns userId and eventCount. Only counts events that have end date in the past and where the participant and event status are active.")
+    public EventsParticipatedInfo getPastEventCountByUserId(@PathVariable Integer userId) {
+        return userService.getPastEventCountByUserId(userId);
 
+    }
 
 }
