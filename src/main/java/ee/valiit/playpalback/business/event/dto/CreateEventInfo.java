@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 /**
  * DTO for {@link Event}
@@ -47,5 +48,5 @@ public class CreateEventInfo implements Serializable {
     private BigDecimal longitude;
     private BigDecimal latitude;
     private String eventImage;
-
+    private List<Integer> eventGames;
 }
