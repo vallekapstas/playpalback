@@ -1,11 +1,10 @@
 package ee.valiit.playpalback.business.event;
 
 import ee.valiit.playpalback.business.event.dto.EventInfoRequest;
+import ee.valiit.playpalback.domain.event.event.CreateEventInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
@@ -21,5 +20,10 @@ public class EventController {
         return eventService.getEventData(eventId);
     }
 
+    @PostMapping("/event")
+    public void createEvent(@RequestBody CreateEventInfo createEventInfo) {
 
+        return eventService.createEvent;
+
+    }
 }
