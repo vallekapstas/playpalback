@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -36,5 +37,12 @@ public class ParticipantController {
     public ParticipantCountInfo getParticipantCountByEventId(@PathVariable Integer eventId) {
         return participantService.getParticipantCountByEventId(eventId);
 
+    }
+
+    @PutMapping("/participant/{participantId}/accept")
+    @Operation(summary = "Accept participant to event.",
+            description = "Updates the status of a participant to 'A' (Accepted).")
+    public void acceptParticipantToEvent(@PathVariable Integer participantId) {
+        participantService.acceptParticipantToEvent(participantId);
     }
 }
