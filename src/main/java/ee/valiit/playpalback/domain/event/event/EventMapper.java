@@ -1,6 +1,7 @@
 package ee.valiit.playpalback.domain.event.event;
 
 import ee.valiit.playpalback.business.event.dto.EventInfoRequest;
+import ee.valiit.playpalback.business.participant.dto.AddParticipantToEventRequest;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
@@ -30,6 +31,5 @@ public interface EventMapper {
     @Mapping(source = "location.city.county.country.name", target="countryName")
     @Mapping(source = "status", target = "eventStatus")
     EventInfoRequest toEventInfo(Event event);
-    @Mapping(source = "endDate", target = "endDate")
-    EventInfoRequest toEventEndDate(Event event);
+
 }
