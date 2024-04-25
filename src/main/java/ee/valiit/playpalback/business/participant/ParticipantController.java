@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -35,6 +36,12 @@ public class ParticipantController {
                     "if event does not exist, user count of 0 will be returned.")
     public ParticipantCountInfo getParticipantCountByEventId(@PathVariable Integer eventId) {
         return participantService.getParticipantCountByEventId(eventId);
+    }
 
+    @PutMapping("/participant/{participantId}/reject")
+    @Operation(summary = "Rejects a participant from event.",
+            description = "Updates the status of a participant to 'R'(Rejected).")
+    public void rejectParticipant(@PathVariable Integer participantId) {
+        participantService.rejectParticipant(participantId);
     }
 }

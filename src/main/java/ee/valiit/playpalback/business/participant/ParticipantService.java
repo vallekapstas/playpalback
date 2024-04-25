@@ -34,6 +34,12 @@ public class ParticipantService {
         return new ParticipantCountInfo(eventId, participantCount);
     }
 
+    public void rejectParticipant(Integer participantId) {
+        Participant participant = participantRepository.getReferenceById(participantId);
+        participant.setStatus(Status.REJECTED);
+        participantRepository.save(participant);
+    }
+
     private ParticipantInfo handleParticipantInfoRequest(Integer eventId, Integer userId) {
         Participant participant = participantRepository.findParticipantByEventIdAndUserId(eventId, userId);
         validateParticipant(participant);
