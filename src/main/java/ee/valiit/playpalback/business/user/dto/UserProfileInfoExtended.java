@@ -17,7 +17,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserProfileInfoExtended implements Serializable {
-    private Integer userId;
     private String username;
     private Integer roleId;
     private Integer genderId;
