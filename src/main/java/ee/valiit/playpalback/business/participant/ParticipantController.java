@@ -45,7 +45,7 @@ public class ParticipantController {
 
     @GetMapping("/participants/event/{eventId}")
     @Operation(summary = "Get participants by event.",
-            description = "Retrieve a list of participants related to a certain event. By default, filters by status != 'D'.")
+            description = "Retrieve a list of participants related to a certain event. Optional Filtering by status.")
     public ResponseEntity<List<ParticipantInfo>> getListOfParticipants(@PathVariable Integer eventId, @RequestParam(value = "status", required = false) String status) {
         List<ParticipantInfo> participants = participantService.getListOfParticipants(eventId, status);
         return new ResponseEntity<>(participants, HttpStatus.OK);
