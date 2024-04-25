@@ -22,6 +22,8 @@ public interface ProfileMapper {
     @Mapping(source = "user.role.id", target = "roleId")
     @Mapping(source = "gender.id", target = "genderId")
     @Mapping(source = "gender.name", target = "genderName")
+    @Mapping(source = "city.county.country.id", target = "countryId")
+    @Mapping(source = "city.county.id", target = "countyId")
     @Mapping(source = "city.id", target = "cityId")
     @Mapping(source = "city.name", target = "cityName")
     @Mapping(source = "city.county.name", target = "countyName")

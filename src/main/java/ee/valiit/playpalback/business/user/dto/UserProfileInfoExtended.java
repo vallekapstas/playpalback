@@ -22,6 +22,8 @@ public class UserProfileInfoExtended implements Serializable {
     private Integer roleId;
     private Integer genderId;
     private String genderName;
+    private Integer countryId;
+    private Integer countyId;
     private Integer cityId;
     private String cityName;
     private String countyName;
