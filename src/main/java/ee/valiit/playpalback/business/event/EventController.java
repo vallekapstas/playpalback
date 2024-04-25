@@ -1,7 +1,7 @@
 package ee.valiit.playpalback.business.event;
 
+import ee.valiit.playpalback.business.event.dto.CreateEventInfo;
 import ee.valiit.playpalback.business.event.dto.EventInfoRequest;
-import ee.valiit.playpalback.domain.event.event.CreateEventInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +23,7 @@ public class EventController {
     @PostMapping("/event")
     public void createEvent(@RequestBody CreateEventInfo createEventInfo) {
 
-        return eventService.createEvent;
+       eventService.createEvent(createEventInfo);
 
     }
 }

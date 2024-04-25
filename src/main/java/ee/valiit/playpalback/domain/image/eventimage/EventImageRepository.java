@@ -10,4 +10,7 @@ public interface EventImageRepository extends JpaRepository<EventImage, Integer>
     @Query("select e from EventImage e where e.event.id = :id")
     Optional<EventImage> findEventImageByEventId(@Param("id") Integer id);
 
+
+
+
 }

@@ -1,6 +1,6 @@
-package ee.valiit.playpalback.domain.event.event;
+package ee.valiit.playpalback.business.event.dto;
 
-import ee.valiit.playpalback.domain.game.eventgame.EventGame;
+import ee.valiit.playpalback.domain.event.event.Event;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -19,13 +19,13 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateEventInfo implements Serializable {
-    private Integer userId;
+    private Integer hostId;
     @NotNull
     @Size(max = 255)
     private String eventName;
     @NotNull
     @Size(max = 255)
-    private String eventVenue;
+    private String venueName;
     @NotNull
     private LocalDate startDate;
     @NotNull
@@ -41,13 +41,11 @@ public class CreateEventInfo implements Serializable {
     private BigDecimal fee;
     private Integer skillId;
 
-    private Integer locationCityId;
-    private String locationPostCode;
-    private String locationStreet;
-    private BigDecimal locationLongitude;
-    private BigDecimal locationLatitude;
-
-    private EventGame[] eventGames;
+    private Integer cityId;
+    private String postCode;
+    private String street;
+    private BigDecimal longitude;
+    private BigDecimal latitude;
     private String eventImage;
 
 }
