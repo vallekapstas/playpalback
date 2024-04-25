@@ -191,7 +191,7 @@ CREATE TABLE participant
     id       serial  NOT NULL,
     event_id int     NOT NULL,
     user_id  int     NOT NULL,
-    status   char(1) NOT NULL DEFAULT 'A',
+    status   char(1) NOT NULL DEFAULT 'P',
     CONSTRAINT participant_pk PRIMARY KEY (id)
 );
 

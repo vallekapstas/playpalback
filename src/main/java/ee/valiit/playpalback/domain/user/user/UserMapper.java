@@ -2,6 +2,7 @@ package ee.valiit.playpalback.domain.user.user;
 
 import ee.valiit.playpalback.business.Status;
 import ee.valiit.playpalback.business.login.dto.LoginResponse;
+import ee.valiit.playpalback.business.participant.dto.AddParticipantToEventRequest;
 import ee.valiit.playpalback.business.user.dto.UserProfileInfoRequest;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -21,6 +22,7 @@ public interface UserMapper {
     @Mapping(source = "password", target = "password")
     @Mapping(constant = Status.ACTIVE, target = "status")
     User toUser(UserProfileInfoRequest userProfileInfoRequest);
+
 
 
 }
