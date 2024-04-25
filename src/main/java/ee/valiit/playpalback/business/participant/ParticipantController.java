@@ -9,8 +9,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -43,7 +46,8 @@ public class ParticipantController {
     @GetMapping("/participants/event/{eventId}")
     @Operation(summary = "Get participants by event.",
             description = "Retrieve a list of participants related to a certain event. By default, filters by status != 'D'.")
-    public List<ParticipantInfo> getListOfParticipants(@PathVariable Integer eventId) {
-        return participantService.getListOfParticipants(eventId);
+    public ResponseEntity<List<ParticipantInfo>> getListOfParticipants(@PathVariable Integer eventId, @RequestParam(value = "status", required = false) String status) {
+        List<ParticipantInfo> participants = participantService.getListOfParticipants(eventId, status);
+        return new ResponseEntity<>(participants, HttpStatus.OK);
     }
 }

@@ -15,8 +15,9 @@ public interface ParticipantRepository extends JpaRepository<Participant, Intege
     @Query("select count(p) from Participant p JOIN p.event e where p.user.id = :userId and p.event.status=:eventStatus and p.status=:participantStatus and e.endDate < CURRENT TIMESTAMP ")
     long countParticipationForPastEvents(Integer userId, String eventStatus, String participantStatus);
 
-    @Query("select p from Participant p where p.event.id = :eventId and p.status <> :participantStatus order by p.user.username")
-    List<Participant> findParticipantList(Integer eventId, String participantStatus);
+    @Query("select p from Participant p where p.event.id = :eventId and p.status = :participantStatus order by p.user.username")
+    List<Participant> findParticipantListFiltered(Integer eventId, String participantStatus);
 
-
+    @Query("select p from Participant p where p.event.id = :eventId order by p.user.username")
+    List<Participant> findParticipantList(Integer eventId);
 }

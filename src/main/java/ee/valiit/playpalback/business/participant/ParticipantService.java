@@ -36,8 +36,19 @@ public class ParticipantService {
         return new ParticipantCountInfo(eventId, participantCount);
     }
 
-    public List<ParticipantInfo> getListOfParticipants(Integer eventId) {
-        List<Participant> participants = participantRepository.findParticipantList(eventId, Status.DELETED);
+    public List<ParticipantInfo> getListOfParticipants(Integer eventId, String status) {
+        List<Participant> participants;
+        if (status != null) {
+            // If status parameter is provided, filter by status
+            participants = participantRepository.findParticipantListFiltered(eventId, status);
+        } else {
+            // If status parameter is not provided, get all participants for the event
+            participants = participantRepository.findParticipantList(eventId);
+        }
+        return enrichParticipantInfo(participants);
+    }
+
+    private List<ParticipantInfo> enrichParticipantInfo(List<Participant> participants) {
         List<ParticipantInfo> participantInfos = participantMapper.toParticipantInfos(participants);
         for (ParticipantInfo participantInfo : participantInfos) {
             Profile profile = profileRepository.getReferenceById(participantInfo.getUserId());
