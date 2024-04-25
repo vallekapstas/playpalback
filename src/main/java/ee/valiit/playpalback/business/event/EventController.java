@@ -21,6 +21,8 @@ public class EventController {
     }
 
     @PostMapping("/event")
+    @Operation(summary = "Creates an event.",
+            description = "Creates an event, including a location and associated games. The event image data is also saved to the database.")
     public void createEvent(@RequestBody CreateEventInfo createEventInfo) {
 
        eventService.createEvent(createEventInfo);
