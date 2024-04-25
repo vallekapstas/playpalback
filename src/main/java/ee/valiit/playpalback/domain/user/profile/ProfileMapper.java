@@ -17,7 +17,6 @@ public interface ProfileMapper {
     Profile toProfile(UserProfileInfoRequest userProfileInfoRequest);
 
 
-    @Mapping(source = "user.id", target = "userId")
     @Mapping(source = "user.username", target = "username")
     @Mapping(source = "user.role.id", target = "roleId")
     @Mapping(source = "gender.id", target = "genderId")
