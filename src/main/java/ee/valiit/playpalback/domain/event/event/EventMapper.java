@@ -49,8 +49,7 @@ public interface EventMapper {
     @Mapping(source = "maxAge", target = "maxAge")
     @Mapping(source = "fee", target = "fee")
     @Mapping(constant = Status.ACTIVE, target = "status")
-//            @Mapping(source = "", target = "")
-//    @Mapping(source = "skillId", target = "skill")
+    @Mapping(source = "eventDescription", target = "eventDescription")
 
     Event toEvent(CreateEventInfo createEventInfo);
 }
