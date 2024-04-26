@@ -391,5 +391,8 @@ ALTER TABLE "user"
 ALTER TABLE skill
     ADD COLUMN "sort_order" INTEGER;
 ;
+ALTER TABLE event
+    ADD COLUMN "event_description" text;
+
 -- End of file.
 

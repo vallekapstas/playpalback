@@ -31,6 +31,7 @@ public interface EventMapper {
     @Mapping(source = "location.city.county.name", target = "countyName")
     @Mapping(source = "location.city.county.country.name", target="countryName")
     @Mapping(source = "status", target = "eventStatus")
+    @Mapping(source="eventDescription", target = "eventDescription")
     EventInfoRequest toEventInfo(Event event);
 
 

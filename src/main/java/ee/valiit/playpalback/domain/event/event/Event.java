@@ -83,4 +83,8 @@ public class Event {
     @Column(name = "status", nullable = false, length = Integer.MAX_VALUE)
     private String status;
 
+    @NotNull
+    @Column(name = "event_description", nullable = false)
+    private String eventDescription;
+
 }
