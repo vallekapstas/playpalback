@@ -49,4 +49,5 @@ public class CreateEventInfo implements Serializable {
     private BigDecimal latitude;
     private String eventImage;
     private List<Integer> eventGames;
+    private String eventDescription;
 }
