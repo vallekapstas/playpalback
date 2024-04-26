@@ -1,6 +1,7 @@
 package ee.valiit.playpalback.business.event;
 
 import ee.valiit.playpalback.business.Status;
+import ee.valiit.playpalback.business.event.dto.EventFilter;
 import ee.valiit.playpalback.business.event.dto.EventInfoRequest;
 import ee.valiit.playpalback.domain.event.event.Event;
 import ee.valiit.playpalback.domain.event.event.EventMapper;
@@ -40,6 +41,11 @@ public class EventService {
         return eventData;
     }
 
+    public void getEvents(EventFilter params) {
+        // todo: create an Event DTO just for filters to be able to Map the incoming request for the Repository
+        // todo: create a Mapper for request to Event
+        // todo: create a Query in Repository (one big one or smaller ones and then break down the logic here in Service)
+    }
 
     private EventInfoRequest handleEventInfoRequest(Integer eventId) {
         Event event = eventRepository.getEventBy(eventId, Status.DELETED);
