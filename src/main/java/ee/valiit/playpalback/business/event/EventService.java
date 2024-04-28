@@ -46,8 +46,7 @@ public class EventService {
     }
 
     public List<EventList> getEvents(EventFilter params) {
-        Optional<EventFilter> optionalParams = Optional.ofNullable(params);
-        Specification<Event> specification = new EventSpecification(optionalParams);
+        Specification<Event> specification = new EventSpecification(params);
         List<Event> events = eventRepository.findAll(specification);
 
         return eventMapper.toEventsList(events);
