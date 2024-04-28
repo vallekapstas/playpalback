@@ -42,6 +42,7 @@ public interface EventMapper {
     @Mapping(source = "endtime", target = "endTime")
     @Mapping(source = "participant", target = "isParticipant")
     @Mapping(source = "host", target = "isHost")
+    @Mapping(source = "userid", target = "user.id")
     @Mapping(source = "minplayers", target = "minPlayers")
     @Mapping(source = "maxplayers", target = "maxPlayers")
     @Mapping(source = "minage", target = "minAge")

@@ -28,6 +28,7 @@ public class EventFilter implements Serializable {
     private LocalTime endtime;
     private boolean participant;
     private boolean host;
+    private Integer userid;
     private Integer minplayers;
     private Integer maxplayers;
     private Integer minage;
