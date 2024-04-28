@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -21,6 +20,12 @@ public class EventFilter implements Serializable {
     private String stscond;
     private String sortdir;
     private String sortparam;
+    private String name;
+    private String venue;
+    private LocalDate startdate;
+    private LocalDate enddate;
+    private LocalTime starttime;
+    private LocalTime endtime;
     private boolean participant;
     private boolean host;
     private Integer minplayers;
