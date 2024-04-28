@@ -2,7 +2,10 @@ package ee.valiit.playpalback.domain.event.event;
 
 import ee.valiit.playpalback.business.event.dto.EventFilter;
 import ee.valiit.playpalback.business.event.dto.EventInfoRequest;
-import org.mapstruct.*;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingConstants;
+import org.mapstruct.ReportingPolicy;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)
 public interface EventMapper {
@@ -29,6 +32,7 @@ public interface EventMapper {
     @Mapping(source = "status", target = "eventStatus")
     @Mapping(source = "eventDescription", target = "eventDescription")
     EventInfoRequest toEventInfo(Event event);
+
 
     @Mapping(source = "status", target = "status")
     @Mapping(source = "stscond", target = "statusCondition")

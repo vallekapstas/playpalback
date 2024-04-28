@@ -17,6 +17,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,8 +44,8 @@ public class EventService {
     }
 
     public List<Event> getEvents(EventFilter params) {
-        Event eventsRequest = eventMapper.toEventFilteringAndSorting(params);
-        return eventRepository.findEventsByFilteringAndSortingParams(eventsRequest);
+//        Event eventsRequest = eventMapper.toEventFilteringAndSorting(params);
+        return eventRepository.findEventsByFilteringAndSortingParams(Status.DELETED, LocalDate.now());
     }
 
     private EventInfoRequest handleEventInfoRequest(Integer eventId) {
