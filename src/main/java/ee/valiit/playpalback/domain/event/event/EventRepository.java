@@ -42,27 +42,7 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
             "END " +
             "COALESCE(:sortDirection, 'ASC')")
         // Sorting direction with default ASC
-    List<Event> findEventsByFilteringAndSortingParams(
-            @Param("status") String status,
-            @Param("statusCondition") String statusCondition,
-            @Param("participant") Boolean isParticipant,
-            @Param("host") Boolean isHost,
-            @Param("userId") Integer userId,
-            @Param("minPlayers") Integer minPlayers,
-            @Param("maxPlayers") Integer maxPlayers,
-            @Param("minAge") Integer minAge,
-            @Param("maxAge") Integer maxAge,
-            @Param("minFee") Float minFee,
-            @Param("maxFee") Float maxFee,
-            @Param("minJoinedPlayers") Integer minJoinedPlayers,
-            @Param("maxJoinedPlayers") Integer maxJoinedPlayers,
-            @Param("countryId") Integer countryId,
-            @Param("countyId") Integer countyId,
-            @Param("cityId") Integer cityId,
-            @Param("skillId") Integer skillId,
-            @Param("sortParameter") String sortParameter,
-            @Param("sortDirection") String sortDirection
-    );
+    List<Event> findEventsByFilteringAndSortingParams(Event eventsRequest);
 
 
 }

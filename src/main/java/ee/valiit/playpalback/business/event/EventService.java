@@ -17,6 +17,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -41,10 +42,9 @@ public class EventService {
         return eventData;
     }
 
-    public void getEvents(EventFilter params) {
-        // todo: create an Event DTO just for filters to be able to Map the incoming request for the Repository
-        // todo: create a Mapper for request to Event
-        // todo: create a Query in Repository (one big one or smaller ones and then break down the logic here in Service)
+    public List<Event> getEvents(EventFilter params) {
+        Event eventsRequest = eventMapper.toEventFilteringAndSorting(params);
+        return eventRepository.findEventsByFilteringAndSortingParams(eventsRequest);
     }
 
     private EventInfoRequest handleEventInfoRequest(Integer eventId) {
