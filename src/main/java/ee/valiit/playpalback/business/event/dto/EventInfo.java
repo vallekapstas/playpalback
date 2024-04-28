@@ -16,7 +16,7 @@ import java.time.LocalTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class EventInfoRequest implements Serializable {
+public class EventInfo implements Serializable {
     private Integer eventId;
     private Integer hostId;
     private String hostFirstName;

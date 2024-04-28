@@ -1,11 +1,8 @@
 package ee.valiit.playpalback.domain.event.event;
 
-import ee.valiit.playpalback.business.event.dto.EventInfoRequest;
-import ee.valiit.playpalback.business.event.dto.EventInfosResponse;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingConstants;
-import org.mapstruct.ReportingPolicy;
+import ee.valiit.playpalback.business.event.dto.EventInfo;
+import ee.valiit.playpalback.business.event.dto.EventList;
+import org.mapstruct.*;
 
 import java.util.List;
 
@@ -33,9 +30,12 @@ public interface EventMapper {
     @Mapping(source = "location.city.county.country.name", target = "countryName")
     @Mapping(source = "status", target = "eventStatus")
     @Mapping(source = "eventDescription", target = "eventDescription")
-    EventInfoRequest toEventInfo(Event event);
+    EventInfo toEventInfo(Event event);
 
-    List<EventInfosResponse> toEventsInfos(List<Event> events);
+    @Mapping(source = "id", target = "eventId")
+    EventList toEventList(Event event);
+
+    List<EventList> toEventsList(List<Event> events);
 
 
 //    @Mapping(source = "status", target = "status")

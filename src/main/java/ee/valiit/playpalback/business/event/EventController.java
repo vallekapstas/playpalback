@@ -1,7 +1,7 @@
 package ee.valiit.playpalback.business.event;
 
-import ee.valiit.playpalback.business.event.dto.EventInfoRequest;
-import ee.valiit.playpalback.business.event.dto.EventInfosResponse;
+import ee.valiit.playpalback.business.event.dto.EventInfo;
+import ee.valiit.playpalback.business.event.dto.EventList;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,12 +20,12 @@ public class EventController {
     @Operation(summary = "Returns details for an event by it's ID.",
             description = "Also returns the eventImage, Host's firstName and lastName from Profile and participantCount from Participants table; " +
                     "does return only events where status is not DELETED")
-    public EventInfoRequest getEventData(@PathVariable Integer eventId) {
+    public EventInfo getEventData(@PathVariable Integer eventId) {
         return eventService.getEventData(eventId);
     }
 
     @GetMapping("/events")
-    public List<EventInfosResponse> getEvents() {
+    public List<EventList> getEvents() {
         return eventService.getEvents();
     }
 }

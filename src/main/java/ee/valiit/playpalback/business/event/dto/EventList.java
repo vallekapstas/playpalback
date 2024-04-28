@@ -13,6 +13,6 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class EventInfosResponse implements Serializable {
+public class EventList implements Serializable {
     private Integer eventId;
 }
