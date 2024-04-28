@@ -1,6 +1,5 @@
 package ee.valiit.playpalback.domain.event.event;
 
-import ee.valiit.playpalback.business.event.dto.EventFilter;
 import ee.valiit.playpalback.business.event.dto.EventInfoRequest;
 import ee.valiit.playpalback.business.event.dto.EventInfosResponse;
 import org.mapstruct.Mapper;
