@@ -3,6 +3,7 @@ package ee.valiit.playpalback.business.event;
 import ee.valiit.playpalback.business.Status;
 import ee.valiit.playpalback.business.event.dto.CreateEventInfo;
 import ee.valiit.playpalback.business.event.dto.EventInfoRequest;
+import ee.valiit.playpalback.business.event.dto.EventList;
 import ee.valiit.playpalback.domain.event.event.Event;
 import ee.valiit.playpalback.domain.event.event.EventMapper;
 import ee.valiit.playpalback.domain.event.event.EventRepository;
@@ -30,6 +31,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -63,8 +65,6 @@ public class EventService {
     }
 
 
-
-
     @Transactional
     public void createEvent(CreateEventInfo createEventInfo) {
         Event event = eventMapper.toEvent(createEventInfo);
@@ -91,6 +91,11 @@ public class EventService {
 //                eventGameRepository.save(eventGame);
 //            }
 //        }
+    }
+
+    public List<EventList> getEvents(String status, String stscond, String sortdir, String sortparam) {
+        List<Event> events = eventRepository.findEventsBy(status, stscond, sortdir, sortparam);
+        return eventMapper.toEventsList(events);
     }
 
     private EventInfoRequest handleEventInfoRequest(Integer eventId) {

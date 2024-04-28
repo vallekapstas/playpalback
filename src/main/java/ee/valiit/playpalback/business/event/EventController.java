@@ -2,9 +2,12 @@ package ee.valiit.playpalback.business.event;
 
 import ee.valiit.playpalback.business.event.dto.CreateEventInfo;
 import ee.valiit.playpalback.business.event.dto.EventInfoRequest;
+import ee.valiit.playpalback.business.event.dto.EventList;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -25,7 +28,17 @@ public class EventController {
             description = "Creates an event, including a location and associated games. The event image data is also saved to the database.")
     public void createEvent(@RequestBody CreateEventInfo createEventInfo) {
 
-       eventService.createEvent(createEventInfo);
+        eventService.createEvent(createEventInfo);
 
+    }
+
+    @GetMapping("events")
+    public List<EventList> getEvents(
+            @RequestParam(defaultValue = "A") String status,
+            @RequestParam(defaultValue = "is") String stscond,
+            @RequestParam(defaultValue = "ASC") String sortdir,
+            @RequestParam(defaultValue = "start_date") String sortparam
+    ) {
+        return eventService.getEvents(status, stscond, sortdir, sortparam);
     }
 }
