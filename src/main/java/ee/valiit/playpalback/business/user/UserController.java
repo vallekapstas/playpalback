@@ -46,8 +46,8 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "403", description = "This username is already taken", content = @Content(schema = @Schema(implementation = ApiError.class)))})
-    public void editUserProfile(@PathVariable Integer userId, @RequestBody UserProfileInfoEdit UserProfileInfoEdit) {
-        userService.editUserProfile(userId, UserProfileInfoEdit);
+    public void editUserProfile(@PathVariable Integer userId, @RequestBody UserProfileInfoEdit userProfileInfoEdit) {
+        userService.editUserProfile(userId, userProfileInfoEdit);
     }
 
     @GetMapping("/user/{userId}/eventcount")

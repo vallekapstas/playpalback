@@ -76,12 +76,12 @@ public class UserService {
     }
 
 
-    public void editUserProfile(Integer userId, UserProfileInfoEdit UserProfileInfoEdit) {
-        Profile profile = getProfile(userId, UserProfileInfoEdit);
-        handleUsernameUpdate(UserProfileInfoEdit, profile);
-        updateProfileCity(UserProfileInfoEdit, profile);
-        updateProfileGender(UserProfileInfoEdit, profile);
-        updateProfileImage(userId, UserProfileInfoEdit);
+    public void editUserProfile(Integer userId, UserProfileInfoEdit userProfileInfoEdit) {
+        Profile profile = getProfile(userId, userProfileInfoEdit);
+        handleUsernameUpdate(userProfileInfoEdit, profile);
+        updateProfileCity(userProfileInfoEdit, profile);
+        updateProfileGender(userProfileInfoEdit, profile);
+        updateProfileImage(userId, userProfileInfoEdit);
         profileRepository.save(profile);
     }
 
