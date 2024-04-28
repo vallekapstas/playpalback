@@ -1,8 +1,8 @@
 package ee.valiit.playpalback.business.event;
 
 import ee.valiit.playpalback.business.Status;
-import ee.valiit.playpalback.business.event.dto.EventFilter;
 import ee.valiit.playpalback.business.event.dto.EventInfoRequest;
+import ee.valiit.playpalback.business.event.dto.EventInfosResponse;
 import ee.valiit.playpalback.domain.event.event.Event;
 import ee.valiit.playpalback.domain.event.event.EventMapper;
 import ee.valiit.playpalback.domain.event.event.EventRepository;
@@ -43,9 +43,10 @@ public class EventService {
         return eventData;
     }
 
-    public List<Event> getEvents(EventFilter params) {
+    public List<EventInfosResponse> getEvents() {
 //        Event eventsRequest = eventMapper.toEventFilteringAndSorting(params);
-        return eventRepository.findEventsByFilteringAndSortingParams(Status.DELETED, LocalDate.now());
+        List<Event> events = eventRepository.findEventsBy(Status.DELETED, LocalDate.now());
+        return eventMapper.toEventsInfos(events);
     }
 
     private EventInfoRequest handleEventInfoRequest(Integer eventId) {
