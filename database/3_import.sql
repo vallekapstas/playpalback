@@ -256,9 +256,9 @@ INSERT INTO playpal.profile (user_id, gender_id, city_id, first_name, last_name,
 INSERT INTO playpal.profile (user_id, gender_id, city_id, first_name, last_name, birth_date, interested_in, introduction) VALUES (5, 1, 66, 'Heli', 'Looja', '2064-01-01', 'Muusika', 'Mu vanemad on heliloojad');
 
 INSERT INTO playpal.skill (name) VALUES ('Kõik on teretulnud');
-INSERT INTO playpal.skill (name) VALUES ('Algaja');
-INSERT INTO playpal.skill (name) VALUES ('Edasijõudnu');
-INSERT INTO playpal.skill (name) VALUES ('Ekspert');
+INSERT INTO playpal.skill (name) VALUES ('Algajad');
+INSERT INTO playpal.skill (name) VALUES ('Edasijõudnud');
+INSERT INTO playpal.skill (name) VALUES ('Eksperdid');
 UPDATE playpal.skill SET sort_order = 1000 WHERE id = 1;
 UPDATE playpal.skill SET sort_order = 2000 WHERE id = 2;
 UPDATE playpal.skill SET sort_order = 3000 WHERE id = 3;

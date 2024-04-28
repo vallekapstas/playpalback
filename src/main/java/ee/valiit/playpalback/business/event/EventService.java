@@ -31,6 +31,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -93,8 +94,22 @@ public class EventService {
 //        }
     }
 
-    public List<EventList> getEvents(String status, String stscond, String sortdir, String sortparam) {
-        List<Event> events = eventRepository.findEventsBy(status, stscond, sortdir, sortparam);
+    public List<EventList> getEvents(
+            String status,
+            String stscond,
+            String sortdir,
+            String sortparam,
+            LocalDate datefrom,
+            LocalDate dateuntil
+    ) {
+        List<Event> events = eventRepository.findEventsBy(
+                status,
+                stscond,
+                sortdir,
+                sortparam,
+                datefrom,
+                dateuntil
+        );
         return eventMapper.toEventsList(events);
     }
 

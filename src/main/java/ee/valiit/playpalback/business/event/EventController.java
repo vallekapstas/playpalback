@@ -5,8 +5,10 @@ import ee.valiit.playpalback.business.event.dto.EventInfoRequest;
 import ee.valiit.playpalback.business.event.dto.EventList;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -37,8 +39,10 @@ public class EventController {
             @RequestParam(defaultValue = "A") String status,
             @RequestParam(defaultValue = "is") String stscond,
             @RequestParam(defaultValue = "ASC") String sortdir,
-            @RequestParam(defaultValue = "start_date") String sortparam
+            @RequestParam(defaultValue = "start_date") String sortparam,
+            @RequestParam(defaultValue = "") LocalDate datefrom,
+            @RequestParam(defaultValue = "") LocalDate dateuntil
     ) {
-        return eventService.getEvents(status, stscond, sortdir, sortparam);
+        return eventService.getEvents(status, stscond, sortdir, sortparam, datefrom, dateuntil);
     }
 }
