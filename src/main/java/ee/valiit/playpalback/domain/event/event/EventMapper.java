@@ -1,10 +1,12 @@
 package ee.valiit.playpalback.domain.event.event;
 
+import ee.valiit.playpalback.business.event.dto.EventFilter;
 import ee.valiit.playpalback.business.event.dto.EventInfo;
 import ee.valiit.playpalback.business.event.dto.EventList;
 import org.mapstruct.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)
 public interface EventMapper {
@@ -38,30 +40,30 @@ public interface EventMapper {
     List<EventList> toEventsList(List<Event> events);
 
 
-//    @Mapping(source = "status", target = "status")
-//    @Mapping(source = "stscond", target = "statusCondition")
-//    @Mapping(source = "sortdir", target = "sortDirection")
-//    @Mapping(source = "sortparam", target = "sortParameter")
-//    @Mapping(source = "name", target = "name")
-//    @Mapping(source = "venue", target = "venue")
-//    @Mapping(source = "startdate", target = "startDate")
-//    @Mapping(source = "enddate", target = "endDate")
-//    @Mapping(source = "starttime", target = "startTime")
-//    @Mapping(source = "endtime", target = "endTime")
-//    @Mapping(source = "participant", target = "isParticipant")
-//    @Mapping(source = "host", target = "isHost")
-//    @Mapping(source = "userid", target = "user.id")
-//    @Mapping(source = "minplayers", target = "minPlayers")
-//    @Mapping(source = "maxplayers", target = "maxPlayers")
-//    @Mapping(source = "minage", target = "minAge")
-//    @Mapping(source = "maxage", target = "maxAge")
-//    @Mapping(source = "minfee", target = "minFee")
-//    @Mapping(source = "maxfee", target = "maxFee")
-//    @Mapping(source = "minjoined", target = "minJoinedPlayers")
-//    @Mapping(source = "maxjoined", target = "maxJoinedPlayers")
-//    @Mapping(source = "countryid", target = "location.city.county.country.id")
-//    @Mapping(source = "countyid", target = "location.city.county.id")
-//    @Mapping(source = "cityid", target = "location.city.id")
-//    @Mapping(source = "skillid", target = "skill.id")
-//    Event toEventFilteringAndSorting(EventFilter params);
+    @Mapping(source = "status", target = "status")
+    @Mapping(source = "stscond", target = "statusCondition")
+    @Mapping(source = "sortdir", target = "sortDirection")
+    @Mapping(source = "sortparam", target = "sortParameter")
+    @Mapping(source = "name", target = "name")
+    @Mapping(source = "venue", target = "venue")
+    @Mapping(source = "startdate", target = "startDate")
+    @Mapping(source = "enddate", target = "endDate")
+    @Mapping(source = "starttime", target = "startTime")
+    @Mapping(source = "endtime", target = "endTime")
+    @Mapping(source = "participant", target = "isParticipant")
+    @Mapping(source = "host", target = "isHost")
+    @Mapping(source = "userid", target = "user.id")
+    @Mapping(source = "minplayers", target = "minPlayers")
+    @Mapping(source = "maxplayers", target = "maxPlayers")
+    @Mapping(source = "minage", target = "minAge")
+    @Mapping(source = "maxage", target = "maxAge")
+    @Mapping(source = "minfee", target = "minFee")
+    @Mapping(source = "maxfee", target = "maxFee")
+    @Mapping(source = "minjoined", target = "minJoinedPlayers")
+    @Mapping(source = "maxjoined", target = "maxJoinedPlayers")
+    @Mapping(source = "countryid", target = "location.city.county.country.id")
+    @Mapping(source = "countyid", target = "location.city.county.id")
+    @Mapping(source = "cityid", target = "location.city.id")
+    @Mapping(source = "skillid", target = "skill.id")
+    Event toEventFilteringAndSorting(EventFilter params);
 }

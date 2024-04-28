@@ -2,6 +2,7 @@ package ee.valiit.playpalback.domain.event.event;
 
 import ee.valiit.playpalback.domain.location.location.Location;
 import ee.valiit.playpalback.domain.event.skill.Skill;
+import ee.valiit.playpalback.domain.participant.participant.Participant;
 import ee.valiit.playpalback.domain.user.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -12,6 +13,8 @@ import lombok.Setter;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -90,34 +93,34 @@ public class Event {
 
     // ADDITIONAL LOGIC FOR FILTERING AND SORTING
 
-//    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private Set<Participant> participants = new HashSet<>();
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Participant> participants = new HashSet<>();
 
-//    @Transient
-//    private String statusCondition;
-//
-//    @Transient
-//    private String sortDirection;
-//
-//    @Transient
-//    private String sortParameter;
-//
-//    @Transient
-//    private Boolean isParticipant;
-//
-//    @Transient
-//    private Boolean isHost;
-//
-//    @Transient
-//    private Float minFee;
-//
-//    @Transient
-//    private Float maxFee;
-//
-//    @Transient
-//    private Integer minJoinedPlayers;
-//
-//    @Transient
-//    private Integer maxJoinedPlayers;
+    @Transient
+    private String statusCondition;
+
+    @Transient
+    private String sortDirection;
+
+    @Transient
+    private String sortParameter;
+
+    @Transient
+    private Boolean isParticipant;
+
+    @Transient
+    private Boolean isHost;
+
+    @Transient
+    private Float minFee;
+
+    @Transient
+    private Float maxFee;
+
+    @Transient
+    private Integer minJoinedPlayers;
+
+    @Transient
+    private Integer maxJoinedPlayers;
 
 }

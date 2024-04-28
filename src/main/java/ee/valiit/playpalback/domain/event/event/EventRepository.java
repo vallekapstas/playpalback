@@ -1,12 +1,13 @@
 package ee.valiit.playpalback.domain.event.event;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 
 import java.time.LocalDate;
 import java.util.List;
 
-public interface EventRepository extends JpaRepository<Event, Integer> {
+public interface EventRepository extends JpaRepository<Event, Integer>, JpaSpecificationExecutor<Event> {
     @Query("select e from Event e where e.id = :eventId and e.status <> :eventStatus")
     Event getEventBy(Integer eventId, String eventStatus);
 

@@ -1,6 +1,7 @@
 package ee.valiit.playpalback.business.event;
 
 import ee.valiit.playpalback.business.Status;
+import ee.valiit.playpalback.business.event.dto.EventFilter;
 import ee.valiit.playpalback.business.event.dto.EventInfo;
 import ee.valiit.playpalback.business.event.dto.EventList;
 import ee.valiit.playpalback.domain.event.event.Event;
@@ -15,6 +16,7 @@ import ee.valiit.playpalback.domain.user.profile.ProfileRepository;
 import ee.valiit.playpalback.util.StringConverter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -43,11 +45,11 @@ public class EventService {
         return eventData;
     }
 
-    public List<EventList> getEvents() {
-//        Event eventsRequest = eventMapper.toEventFilteringAndSorting(params);
-        List<Event> events = eventRepository.findEventsBy(Status.DELETED, LocalDate.now());
-        List<EventList> eventsList = eventMapper.toEventsList(events);
-        return eventsList;
+    public List<EventList> getEvents(Optional<EventFilter> params) {
+        Specification<Event> specification = new EventSpecification(params);
+        List<Event> events = eventRepository.findAll(specification);
+
+        return eventMapper.toEventsList(events);
     }
 
     private EventInfo handleEventInfoRequest(Integer eventId) {
