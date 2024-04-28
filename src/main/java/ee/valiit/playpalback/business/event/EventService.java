@@ -2,7 +2,7 @@ package ee.valiit.playpalback.business.event;
 
 import ee.valiit.playpalback.business.Status;
 import ee.valiit.playpalback.business.event.dto.EventFilter;
-import ee.valiit.playpalback.business.event.dto.EventInfo;
+import ee.valiit.playpalback.business.event.dto.EventInfoRequest;
 import ee.valiit.playpalback.business.event.dto.EventList;
 import ee.valiit.playpalback.domain.event.event.Event;
 import ee.valiit.playpalback.domain.event.event.EventMapper;
@@ -19,7 +19,6 @@ import lombok.Data;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,8 +35,8 @@ public class EventService {
     private final EventMapper eventMapper;
     private final ProfileMapper profileMapper;
 
-    public EventInfo getEventData(Integer eventId) {
-        EventInfo eventData = handleEventInfoRequest(eventId);
+    public EventInfoRequest getEventData(Integer eventId) {
+        EventInfoRequest eventData = handleEventInfoRequest(eventId);
         getAndSetHostFirstNameAndLastName(eventData);
         getAndSetEventImage(eventId, eventData);
         getAndSetParticipantCount(eventId, eventData);
@@ -52,17 +51,17 @@ public class EventService {
         return eventMapper.toEventsList(events);
     }
 
-    private EventInfo handleEventInfoRequest(Integer eventId) {
+    private EventInfoRequest handleEventInfoRequest(Integer eventId) {
         Event event = eventRepository.getEventBy(eventId, Status.DELETED);
         return eventMapper.toEventInfo(event);
     }
 
-    private void getAndSetEventImage(Integer eventId, EventInfo eventData) {
+    private void getAndSetEventImage(Integer eventId, EventInfoRequest eventData) {
         String imageData = getImageData(eventId);
         eventData.setEventImage(imageData);
     }
 
-    private void getAndSetHostFirstNameAndLastName(EventInfo eventData) {
+    private void getAndSetHostFirstNameAndLastName(EventInfoRequest eventData) {
         Profile profile = profileRepository.findProfileByUserIdAndStatus(eventData.getHostId(), Status.DELETED);
         eventData.setHostFirstName(profile.getFirstName());
         eventData.setHostLastName(profile.getLastName());
@@ -79,7 +78,7 @@ public class EventService {
         return imageData;
     }
 
-    private void getAndSetParticipantCount(Integer eventId, EventInfo eventData) {
+    private void getAndSetParticipantCount(Integer eventId, EventInfoRequest eventData) {
         long participantCount = participantRepository.countByEventIdAndEventStatus(eventId, Status.ACTIVE);
         eventData.setParticipantCount(participantCount);
     }

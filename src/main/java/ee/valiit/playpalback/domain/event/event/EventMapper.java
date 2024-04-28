@@ -1,12 +1,11 @@
 package ee.valiit.playpalback.domain.event.event;
 
 import ee.valiit.playpalback.business.event.dto.EventFilter;
-import ee.valiit.playpalback.business.event.dto.EventInfo;
+import ee.valiit.playpalback.business.event.dto.EventInfoRequest;
 import ee.valiit.playpalback.business.event.dto.EventList;
 import org.mapstruct.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)
 public interface EventMapper {
@@ -32,7 +31,7 @@ public interface EventMapper {
     @Mapping(source = "location.city.county.country.name", target = "countryName")
     @Mapping(source = "status", target = "eventStatus")
     @Mapping(source = "eventDescription", target = "eventDescription")
-    EventInfo toEventInfo(Event event);
+    EventInfoRequest toEventInfo(Event event);
 
     @Mapping(source = "id", target = "eventId")
     EventList toEventList(Event event);
