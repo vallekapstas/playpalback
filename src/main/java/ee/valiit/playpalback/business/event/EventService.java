@@ -8,9 +8,7 @@ import ee.valiit.playpalback.domain.event.event.EventMapper;
 import ee.valiit.playpalback.domain.event.event.EventRepository;
 import ee.valiit.playpalback.domain.event.skill.Skill;
 import ee.valiit.playpalback.domain.event.skill.SkillRepository;
-import ee.valiit.playpalback.domain.game.eventgame.EventGame;
 import ee.valiit.playpalback.domain.game.eventgame.EventGameRepository;
-import ee.valiit.playpalback.domain.game.game.Game;
 import ee.valiit.playpalback.domain.game.game.GameRepository;
 import ee.valiit.playpalback.domain.image.eventimage.EventImage;
 import ee.valiit.playpalback.domain.image.eventimage.EventImageMapper;
@@ -27,13 +25,11 @@ import ee.valiit.playpalback.domain.user.profile.ProfileRepository;
 import ee.valiit.playpalback.domain.user.user.User;
 import ee.valiit.playpalback.domain.user.user.UserRepository;
 import ee.valiit.playpalback.util.StringConverter;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -85,16 +81,16 @@ public class EventService {
         EventImage eventImage = eventImageMapper.toEventImage(createEventInfo);
         eventImage.setEvent(event);
         eventImageRepository.save(eventImage);
-        List<Integer> eventGameIds = createEventInfo.getEventGames();
-        if (eventGameIds != null && !eventGameIds.isEmpty()) {
-            for (Integer eventGameId : eventGameIds) {
-                EventGame eventGame = new EventGame();
-                eventGame.setEvent(event);
-                Game game = gameRepository.findById(eventGameId).orElseThrow(() -> new EntityNotFoundException("Game not found with id: " + eventGameId));
-                eventGame.setGame(game);
-                eventGameRepository.save(eventGame);
-            }
-        }
+//        List<Integer> eventGameIds = createEventInfo.getEventGames();
+//        if (eventGameIds != null && !eventGameIds.isEmpty()) {
+//            for (Integer eventGameId : eventGameIds) {
+//                EventGame eventGame = new EventGame();
+//                eventGame.setEvent(event);
+//                Game game = gameRepository.findById(eventGameId).orElseThrow(() -> new EntityNotFoundException("Game not found with id: " + eventGameId));
+//                eventGame.setGame(game);
+//                eventGameRepository.save(eventGame);
+//            }
+//        }
     }
 
     private EventInfoRequest handleEventInfoRequest(Integer eventId) {
