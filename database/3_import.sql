@@ -6,6 +6,7 @@ INSERT INTO playpal."user" (username, password, role_id) VALUES ('juku', '123', 
 INSERT INTO playpal."user" (username, password, role_id) VALUES ('admin', '123', 1);
 INSERT INTO playpal."user" (username, password, role_id) VALUES ('Pets', '123', 2);
 INSERT INTO playpal."user" (username, password, role_id) VALUES ('Jaan', '123', 2);
+INSERT INTO playpal."user" (username, password, role_id) VALUES ('pets', '123', 2);
 
 INSERT INTO playpal.gender (name) VALUES ('Naine');
 INSERT INTO playpal.gender (name) VALUES ('Mees');
@@ -249,11 +250,12 @@ INSERT INTO playpal.city (county_id, name) VALUES (15, 'Palivere');
 INSERT INTO playpal.city (county_id, name) VALUES (15, 'Paralepa');
 INSERT INTO playpal.city (county_id, name) VALUES (15, 'Taebla');
 
-INSERT INTO playpal.profile (user_id, gender_id, city_id, first_name, last_name, birth_date, interested_in, introduction) VALUES (1, 2, 1, 'Rain', 'Tüür', '1900-01-01', 'EVERY! THING!??!!', 'Jah');
+INSERT INTO playpal.profile (user_id, gender_id, city_id, first_name, last_name, birth_date, interested_in, introduction) VALUES (1, 2, 1, 'Rain', 'Tüür', '1900-01-01', 'EVERY! THING!??!!', 'Kui võtad minu eventile kaasa meetodi, siis pane ta muutujasse.');
 INSERT INTO playpal.profile (user_id, gender_id, city_id, first_name, last_name, birth_date, interested_in, introduction) VALUES (2, 2, 5, 'Juku', 'Pauk', '2014-01-01', 'mängimine, MINECRAFT!!!', 'lit');
 INSERT INTO playpal.profile (user_id, gender_id, city_id, first_name, last_name, birth_date, interested_in, introduction) VALUES (3, 2, 25, 'Suur', 'Kärss', '2064-01-01', 'Administreerimine', 'Ma näen kõike');
 INSERT INTO playpal.profile (user_id, gender_id, city_id, first_name, last_name, birth_date, interested_in, introduction) VALUES (4, 2, 45, 'Cash', 'Money', '2064-01-01', 'raha', 'rahaboss');
 INSERT INTO playpal.profile (user_id, gender_id, city_id, first_name, last_name, birth_date, interested_in, introduction) VALUES (5, 1, 66, 'Heli', 'Looja', '2064-01-01', 'Muusika', 'Mu vanemad on heliloojad');
+INSERT INTO playpal.profile (user_id, gender_id, city_id, first_name, last_name, birth_date, interested_in, introduction) VALUES (6, 1, 68, 'Pets', 'Võsa', '2064-01-01', 'metsad', 'Ma olen staar');
 
 INSERT INTO playpal.skill (name) VALUES ('Kõik on teretulnud');
 INSERT INTO playpal.skill (name) VALUES ('Algajad');
@@ -274,7 +276,7 @@ INSERT INTO playpal.location (city_id, post_code, street, longitude, latitude) V
 INSERT INTO playpal.location (city_id, post_code, street, longitude, latitude) VALUES (100, '51004', 'Lõkke 666', 58.382643, 26.724832);
 
 INSERT INTO playpal.event (user_id, name, venue, start_date, end_date, start_time, end_time, min_players, max_players, min_age, max_age, fee, skill_id, location_id, event_description) VALUES (1, 'Monopolyõhtu Raini juures', 'Raini pleiss', '2024-05-04', '2024-05-04', '16:00:00', '22:00:00', 4, 8, 18, 125, null, 1, 1, 'Kui võtad minu üritusele kaasa meetodi, siis pane ta muutujasse. #coolcoolcool');
-INSERT INTO playpal.event (user_id, name, venue, start_date, end_date, start_time, end_time, min_players, max_players, min_age, max_age, fee, skill_id, location_id, event_description) VALUES (2, 'Wingspan @ Naiiv', 'Naiiv', '2024-05-05', '2024-05-05', '18:00:00', '21:30:00', 3, 5, 6, 66, 5.00, 2, 2,'"Wingspan" on mäng, kus saad olla linnuvaatleja ja luua enda unistuste linnuparadiisi! Kogu erinevaid linnuliike, ehitades üles oma parki ja võid mängu võites näidata, kes on tõeline sulg! Linnulised seiklused ootavad sind!');
+INSERT INTO playpal.event (user_id, name, venue, start_date, end_date, start_time, end_time, min_players, max_players, min_age, max_age, fee, skill_id, location_id, event_description) VALUES (2, 'Wingspan @ Naiiv', ' Kohvik Naiiv', '2024-05-05', '2024-05-05', '18:00:00', '21:30:00', 3, 5, 6, 66, 5.00, 2, 2,'"Wingspan" on mäng, kus saad olla linnuvaatleja ja luua enda unistuste linnuparadiisi! Kogu erinevaid linnuliike, ehitades üles oma parki ja võid mängu võites näidata, kes on tõeline sulg! Linnulised seiklused ootavad sind!');
 INSERT INTO playpal.event (user_id, name, venue, start_date, end_date, start_time, end_time, min_players, max_players,min_age, max_age, fee, skill_id, location_id, event_description) VALUES (3, 'Alias koopas', 'koobas', '2024-03-03', '2024-03-03', '18:00:00', '21:30:00', 1, 5, 12, 67, 7.00, 1, 4,'
 Tere sõber!Kas oled valmis seiklema mõistatuste maailmas, avastama saladusi ja naerma südamest? Siis oled oodatud meie lauamänguõhtule koopasse, kus võtame ette põneva seikluse mängides mängu "Alias"!
 Mida oodata?
@@ -289,10 +291,10 @@ Olete kutsutud erilisele seiklusele, kus rändame kaugel asuva Catan''i saare ma
 Koos veedame õhtu lauamängu "Catan" mängides, kus igaüks saab kujundada oma impeeriumi, kaubelda ressurssidega ning ehitada teid ja asulaid, et saada saare suurimaks valitsejaks!
 Ärge unustage kaasa võtta head tuju ja oma parimaid strateegilisi oskusi, sest ees ootavad põnevad väljakutsed ja võidusõidud!
 Ootame teid suure põnevusega!');
-INSERT INTO playpal.event (user_id, name, venue, start_date, end_date, start_time, end_time, min_players, max_players,min_age, max_age, fee, skill_id, location_id, event_description) VALUES (3, 'Turakas Türgis', 'Türkland', '2024-06-06', '2024-06-07', '12:00:00', '21:00:00', 0, 8, 32, 37, 1.00, 2, 4,'Olete oodatud meie erilisele "Turakas Mängimise Õhtule", kus saate sukelduda põnevasse ja lõbusasse mängumaailma koos sõprade ja pereliikmetega. Oodatud on nii kogenud mängurid kui ka algajad! Tutvustame teile "Turakat" - mängu, mis pakub nii naeru kui ka strateegilist mõtlemist. Olge valmis võtma vastu väljakutseid ja kogema mängurõõmu!');
-INSERT INTO playpal.event (user_id, name, venue, start_date, end_date, start_time, end_time, min_players, max_players,min_age, max_age, fee, skill_id, location_id, event_description) VALUES (3, 'Linnade põletamine jaanipäeval', 'Fire', '2024-02-02', '2024-02-02', '12:00:00', '21:00:00', 1, 99, 22, 57, 0.50, 1, 6,'Tere kõigile linnade põletamise fännidele!
+INSERT INTO playpal.event (user_id, name, venue, start_date, end_date, start_time, end_time, min_players, max_players,min_age, max_age, fee, skill_id, location_id, event_description) VALUES (2, 'Turakas Türgis', 'Türkland', '2024-06-06', '2024-06-07', '12:00:00', '21:00:00', 0, 8, 32, 37, 1.00, 2, 4,'Olete oodatud meie erilisele "Turakas Mängimise Õhtule", kus saate sukelduda põnevasse ja lõbusasse mängumaailma koos sõprade ja pereliikmetega. Oodatud on nii kogenud mängurid kui ka algajad! Tutvustame teile "Turakat" - mängu, mis pakub nii naeru kui ka strateegilist mõtlemist. Olge valmis võtma vastu väljakutseid ja kogema mängurõõmu!');
+INSERT INTO playpal.event (user_id, name, venue, start_date, end_date, start_time, end_time, min_players, max_players,min_age, max_age, fee, skill_id, location_id, event_description) VALUES (6, 'Linnade põletamine jaanipäeval', 'Fire', '2024-06-24', '2024-06-24', '12:00:00', '23:00:00', 1, 99, 22, 57, 0.50, 1, 6,'Tere kõigile linnade põletamise fännidele!
 Kas oled valmis kogema kaardimängu adrenaliinirohket põnevust? Kutsume sind osalema meie lõbusal ja mõnusal "Linnade Põletamine" kaardimängu õhtul!');
-INSERT INTO playpal.event (user_id, name, venue, start_date, end_date, start_time, end_time, min_players, max_players,min_age, max_age, fee, skill_id, location_id, event_description) VALUES (3, 'Reis ümber maailma', 'Underworld', '2024-01-02', '2024-02-03', '12:00:00', '23:00:00', 1, 7, 1, 11, 0.01, 4, 5,'Kas oled valmis seikluseks, mis viib sind lauamängu reisile ümber maailma? Kui jah, siis on see kutse just sulle! Pakime kotid täis rõõmu, naeru ja mängukomplekte ning asume teele erinevatesse paikadesse üle maailma. Ole valmis avastama uusi kultuure, lahendama mõistatusi ja võtma vastu väljakutseid, mis pakuvad meile kõigile põnevaid elamusi.
+INSERT INTO playpal.event (user_id, name, venue, start_date, end_date, start_time, end_time, min_players, max_players,min_age, max_age, fee, skill_id, location_id, event_description) VALUES (5, 'Reis ümber maailma', 'Underworld', '2024-01-02', '2024-02-03', '12:00:00', '23:00:00', 1, 7, 1, 11, 0.01, 4, 5,'Kas oled valmis seikluseks, mis viib sind lauamängu reisile ümber maailma? Kui jah, siis on see kutse just sulle! Pakime kotid täis rõõmu, naeru ja mängukomplekte ning asume teele erinevatesse paikadesse üle maailma. Ole valmis avastama uusi kultuure, lahendama mõistatusi ja võtma vastu väljakutseid, mis pakuvad meile kõigile põnevaid elamusi.
 Ära maga maha seda unustamatut reisi! Ootame sind põnevale lauamängu seiklusele');
 
 
